@@ -2,8 +2,8 @@
 
 # Этапы
 - Формализация темы:
-	- Выделение всех важных понятий для заданной темы
-	- Выделение отношений между понятиями: is-a, has-is и др.
+  - Выделение всех важных понятий для заданной темы
+  - Выделение отношений между понятиями: is-a, has-is и др.
 - Для каждого выделенного понятия сформировать **короткие** примеры, поясняющий это понятие, показывающие область применения этого понятия
 
 # Требования
@@ -18,22 +18,22 @@
 # Формат описания примера
 ```yaml
 code: |
-	words = {'user', 'billy', 'password', 'text'}
-	print(words['password'])
+  words = {'user', 'billy', 'password', 'text'}
+  print(words['password'])
 tag:
-	- set/operation
+  - set/operation
 
 ---
 
 code: |
-	lst1 = [x for x in range(6)]
-	lst2 = [y for y in range(9)]
-	a = lst1 + lst2
-	print(*a)
+  lst1 = [x for x in range(6)]
+  lst2 = [y for y in range(9)]
+  a = lst1 + lst2
+  print(*a)
 tag:
-	- set
-	- list/comprehension
-	- build-in/set
+  - set
+  - list/comprehension
+  - build-in/set
 ```
 - Для описания кода используется поле `code`. Важно использовать многострочное значение поле: `code: |`
 - Для описания классификации примера используется поле `tag`. Важно использовать массив значений (см. пример)
