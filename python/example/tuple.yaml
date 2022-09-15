@@ -1,0 +1,152 @@
+code: |
+  a = (el for el in range(5))
+  b = (el for el in range(7, 13, 2))
+  t = (a, b)
+  print(t)
+output: "(<generator object <genexpr> at 0x7f8f46f245f0>, <generator object <genexpr> at 0x7f8f46d255b0>)"
+tag:
+  - build-in/range
+  - tuple
+  - generator
+
+---
+code: |
+  a = [6, 5, 8, 2, 1]
+  t = tuple(el for el in a)
+  print(t[1::-1])
+output: "(5, 6)"
+tag:
+  - tuple/slice
+
+---
+code: |
+  a = ()
+
+  print(type(a))
+output: "<class 'tuple'>"
+tag:
+  - tuple/literal
+
+---
+code: |
+  tp = (0, 1)
+  tp[0] = 1
+
+  print(tp)
+output: "TypeError: 'tuple' object does not support item assignment"
+tag:
+  - tuple/assignment
+
+---
+code: |
+  t = ("Jake", "Mike", "O'Brien", "Tim", "George", "Heisenberg")
+  t.sort(key=lambda x: len(x), reverse=True)
+  
+  print(t.index("Heisenberg"))
+output: "AttributeError: 'tuple' object has no attribute 'sort'"
+tag:
+  - tuple
+
+---
+code: |
+  t = ([17, 9, 59], 12, 9, "rt9y", 11, 3 * 3, 0., 9 / 3 * 3, "3" * 3)
+  
+  print(t.count(9))
+output: "3"
+tag:
+  - tuple/operation/count
+
+---
+code: |
+  tuple1 = (1, 2, 3)
+  tuple2 = tuple(1, 2, 3)
+
+  print(tuple1 == tuple2)
+output: "TypeError: tuple expected at most 1 argument, got 3"
+tag:
+  - tuple/literal
+  - build-in/tuple
+
+---
+code: |
+  a = (1, 2, 3, 2, 1)
+  b = range(1, 6)
+
+  for x in b:
+    if a.__contains__(x):
+      a += (a.count(x),)
+
+  print(a)
+output: "(1, 2, 3, 2, 1, 2, 3, 2)"
+tag:
+  - tuple/operation/contains
+  - tuple/operation/count
+  - build-in/range
+
+---
+
+code: |
+  def foo(value):
+    t = value,
+    return t
+
+  print(foo(1))
+output: "(1,)"
+tag:
+  - tuple/literal
+
+---
+
+code: |
+  t1 = (11, 14, 54, 0, 58, 41)
+  res = len(set(t1)) == len(t1)
+
+  print(res)
+output: "True"
+tag:
+  - tuple/literal
+  - set/parameter
+
+---
+
+code: |
+  value = (4, 5, 6)
+
+  print(type(value) is tuple)
+output: "True"
+tag:
+  - tuple/literal
+  - type
+
+---
+
+code: |
+  value = (1, 3, 7, 8, 7, 5, 4, 6, 8, 5)
+  x = value.count(5)
+
+  print(x)
+output: "2"
+tag:
+  - tuple/operation/count
+
+---
+
+code: |
+  value = (1, 3, 7, 8, 7, 5, 4, 6, 8, 5)
+  x = value.index(8)
+
+  print(x)
+output: "3"
+tag:
+  - tuple/operation/index
+
+---
+
+code: |
+  value = (1, 3, 7, 8, 7, 5, 4, 6, 8, 5)
+  x = value.index(0)
+
+  print(x)
+output: "ValueError: tuple.index(x): x not in tuple"
+tag:
+  - tuple/operation/index

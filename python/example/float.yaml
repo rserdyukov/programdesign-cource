@@ -1,0 +1,84 @@
+code: |
+  a = 0.1 + 0.2
+
+  print(a == float('0.3'))
+output: "False"
+tag:
+  - float/operation/compare
+
+---
+
+code: |
+  for x in range(10):
+    if (x/3).is_integer():
+      print(x)
+output: "0 3 6 9"
+tag:
+  - float/operation/is_integer
+
+---
+
+code: |
+  print(0.5.as_integer_ratio())
+output: "(1, 2)"
+tag:
+  - float/operation/as_integer_ratio
+
+---
+
+code: |
+  print(0.9.as_integer_ratio())
+output: "(8106479329266893, 9007199254740992)"
+tag:
+  - float/operation/as_integer_ratio
+
+---
+
+code: |
+  n = 6.732894256771
+
+  print(f"{n:.4f}" == f"{round(n, 4)}")
+output: "True"
+tag:
+  - float/round
+  - build-in/round
+
+---
+
+code: |
+  a = f"{2e-3 + 0.001 - 1}"
+
+  print(len(a))
+output: "6"
+tag:
+  - float
+  - build-in/len
+
+---
+
+code: |
+  print(9**19 - int(float(9**19)) > 0)
+output: "True"
+tag:
+  - build-in/int
+  - build-in/float
+  - int/operator/exponentiation
+
+---
+
+code: |
+  print(round(0.5))
+output: "0"
+tag:
+  - float/operation/round
+
+---
+code: |
+  a = 5 ** 1000000
+  b = 5. ** 1000000
+
+  print(type(a) == type(b))
+output: "OverflowError: (34, 'Result too large')  "
+tag:
+  - float/comprehension
+  - build-in/type

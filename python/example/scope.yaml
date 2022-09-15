@@ -1,0 +1,276 @@
+code: |
+  def foo():
+    x = 1
+    return x
+
+  foo.x = 4
+
+  print(foo(), foo.x)
+output: "1 4"
+tag:
+  - scope
+  - object/variable
+  - function/variable
+  - function/object
+
+---
+
+code: |
+  def foo():
+    x = 300
+    def foo2():
+    print(x)
+    foo2()
+
+  foo() 
+output: "300"
+tag:
+  - scope
+
+---
+
+code: |
+  x = 300
+
+  def foo():
+    return x
+
+  print(foo() == x)
+output: "True"
+tag:
+  - scope
+  - boolean/operation/compare
+
+---
+
+code: |
+  x = 300
+
+  def foo():
+    x = 200
+    return x
+
+  print(foo(), x)
+output: "200 300"
+tag:
+  - scope
+
+---
+
+code: |
+  def foo():
+    global x
+    x = 300
+
+  foo()
+
+  print(x)
+output: "300"
+tag:
+  - scope
+  - statement/global
+
+---
+
+code: |
+  x = 300
+
+  def foo():
+    global x
+    x = 200
+
+  foo()
+
+  print(x) 
+output: "200"
+tag:
+  - scope
+  - statement/global
+
+---
+
+code: |
+  def foo():
+    x = 12
+    def foo2(a):
+    x += a
+    return x
+    return foo2
+
+  fun = foo()
+
+  print(fun(2))
+output: "UnboundLocalError: local variable 'x' referenced before assignment"
+tag:
+  - scope
+
+---
+code: |
+  num = 2
+
+  def increment():
+    nonlocal num
+    num = num + 1
+    print(num)
+
+  increment()
+output: "SyntaxError: no binding for nonlocal 'num' found"
+tag:
+  - scope/nonlocal
+
+---
+
+code: |
+  def func(): 
+    print(name, end = ' ')
+    name = "Anton"
+    print(name)
+
+  name = "Petr"
+  func()
+output: "UnboundLocalError: local variable 'name' referenced before assignment"
+tag:
+  - scope
+
+---
+
+code: |
+  name = 'Anton'
+
+  def greeting():
+    name = 'Rob'
+    print(f'Hello {name}', end = ' ')
+
+  def farewell():
+    print(f'Bye {name}')
+
+  greeting()
+  farewell()
+output: "Hello Rob Bye Anton"
+tag:
+  - scope
+
+---
+
+code: |
+  name = 'Tom'
+
+  def greeting():
+    global name
+    name = 'Bob'
+    print(f'Hello {name}', end = ' ')
+
+  def farewell():
+    print(f'Bye {name}')
+
+  greeting()
+  farewell()
+output: "Hello Bob Bye Bob"
+tag:
+  - scope/global
+
+---
+
+code: |
+  def outer():
+    num = 5
+
+    def inner():
+      nonlocal num
+      num = 25
+      print(num, end = ' ')
+
+    inner()
+    print(num)
+
+  outer()
+output: "25 25"
+tag:
+  - scope/nonlocal
+  - function/inner
+
+---
+
+code: |
+  def outer():
+    def inner():
+      nonlocal num
+      num = 25
+      print(num, end = ' ')
+
+    inner()
+    print(num)
+
+  outer()
+output: "SyntaxError: no binding for nonlocal 'num' found"
+tag:
+  - scope/nonlocal
+  - function/inner
+
+---
+
+code: |
+  def outer():
+    num = 5
+
+    def inner():
+      global num
+      num = 25
+      print(num, end = ' ')
+
+    inner()
+    print(num)
+
+  outer()
+output: "25 5"
+tag:
+  - scope/global
+  - function/inner
+
+---
+
+code: |
+  num = 2
+
+  def increment():
+    num = num + 1
+    print(num)
+
+  increment()
+output: "UnboundLocalError: local variable 'num' referenced before assignment"
+tag:
+  - scope
+
+---
+
+code: |
+  num = 2
+
+  def increment():
+    global num
+    num = num + 1
+    print(num)
+
+  increment()
+output: "3"
+tag:
+  - scope/global
+
+---
+
+code: |
+  def outer():
+    num = 5
+
+    def inner():
+      num = 25
+      print(num, end = ' ')
+
+    inner()
+    print(num)
+
+  outer()
+output: "25 5"
+tag:
+  - scope
+  - function/inner

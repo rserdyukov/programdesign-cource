@@ -1,0 +1,113 @@
+code: |
+  print(bool('False'), bool('True'))
+output: "True True"
+tag:
+  -  boolean/literal
+
+---
+
+code: |
+  a = True
+
+  a -= True
+  print(a)
+output: "0"
+tag:
+  -  boolean
+
+---
+
+code: |
+  if True:
+    print(1)
+  else:
+    print(0)
+output: "1"
+tag:
+  -  boolean
+
+---
+
+code: |
+  a = 0
+  b = True
+  c = a + b
+
+  print(c is True)
+output: "False"
+tag:
+  -  boolean/literal
+  -  boolean/operation/add
+  -  expression/operation/is
+
+---
+
+code: |
+  a = "True"
+  b = True
+  c = 1
+
+  print(a == b)
+  print(b == c)
+output: "False True"
+tag:
+  -  boolean/literal
+  -  boolean/operation/compare
+
+---
+
+code: |
+  lst = [True, False]
+
+  print(lst[False])
+  print(lst[lst[False]])
+output: "True False"
+tag:
+  -  boolean/literal
+  -  list/literal
+
+---
+
+code: |
+  a = False
+
+  for x in range(1, 3):
+    a = not a
+
+  print(a)
+output: "False"
+tag:
+  -  boolean/literal
+  -  boolean/operation/not
+  -  build-in/range
+
+---
+
+code: |
+  data = [([]), [()]]
+
+  for i in data:
+    print(bool(i), end=' ')
+output: "False True"
+tag:
+  -  boolean/literal
+
+---
+
+code: |
+  elements = ((), [], {}, 0, 0., "", False)
+  print(any(elements))
+output: "False"
+tag:
+  -  boolean #build-in/any
+
+---
+
+code: |
+  x = bool("")
+
+  print(x == True)
+output: "False"
+tag:
+  -  string/literal
+  -  boolean/operation/compare

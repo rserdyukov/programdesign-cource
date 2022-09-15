@@ -1,0 +1,180 @@
+code: |
+  print(print('hi!'))
+output: "hi! None"
+tag:
+  - expression/priority
+
+---
+
+code: |
+  def get_username(user):
+    return user or 'anonymous'
+
+  print(get_username(None))
+output: "anonymous"
+tag:
+  - expression/operation/or
+
+---
+
+code: |
+  print(1.5 % 1)
+output: "0.5"
+tag:
+  - expression/operation/modulo
+
+---
+
+code: |
+  a = None
+  b = False
+
+  print((a or b) or a)
+output: "None"
+tag:
+  - expression/operation/or
+
+---
+
+code: |
+  print(bool(print(print(5))))
+output: "5 None False"
+tag:
+  - expression/priority
+
+---
+
+code: |
+  print(type( 3.4 // 2 ))
+output: "<class 'float'>"
+tag:
+  - expression/integer_division
+
+---
+
+code: |
+  sum = lambda x, y: x + y
+  print(sum(2,4))
+output: "6"
+tag:
+  - expression/lambda
+
+---
+
+code: |
+  print(False == (not True))
+output: "True"
+tag:
+  - expression/operation/not
+
+---
+
+code: |
+  a = 0
+  b = 1
+
+  print(a and (b / a) >= 0)
+output: "0"
+tag:
+  - expression/operation/and
+  - expression/evaluation_order
+
+---
+
+code: |
+  a = 0.1 + 0.2
+  
+  print(a == float(0.3))
+output: "False"
+tag:
+  - expression/operation/equality
+
+---
+
+code: |
+  m = 300
+  count = 0
+  while m <= 305:
+    m = m + 1
+    if m % 2 != 0:
+    continue
+    count += 1
+
+  print(count)
+output: "3"
+tag:
+  - expression/operation/modulo
+
+---
+
+code: |
+  number = 0
+  list = [2, 3, 4, 5]
+  num = 5 % 2
+
+  if num not in list:
+    number = 1
+
+  print(number)
+output: "1"
+tag:
+  - expression/operation/not_in
+  - list
+
+---
+
+code: |
+  number = 0
+  str = 'I love Python'
+  letter = 'l'
+
+  if letter in str:
+    number = 1
+  
+  print(number)
+output: "1"
+tag:
+  - expression/operation/in
+  - string
+
+---
+
+code: |
+  data = {"age": 30, "name": "Bob"}
+
+  print("age" in data)
+output: "True"
+tag:
+  - expression/operation/in
+  - dict
+
+---
+
+code: |
+  a = "2"
+  b = 2
+  c = type(b)
+
+  if c(a) is b:
+    print("True")
+  else:
+    print("False")
+output: "True"
+tag:
+  - expression/operation/is
+  - type
+
+---
+
+code: |
+  number = 0
+  list = [2, 3, 4, 5]
+  num = 5 ** 2
+
+  if num not in list:
+    number = 1
+  
+  print(number)
+output: "1"
+tag:
+  - expression/operation/power

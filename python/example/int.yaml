@@ -1,0 +1,89 @@
+code: |
+  a, b = 3, 4
+
+  print(a.bit_length(), b.bit_length())
+output: "2 3"
+tag:
+  - int/operation/bit_length
+  - int/literal
+
+---
+
+code: |
+  a, b = 3, 4
+
+  print(a.bit_count(), b.bit_count())
+output: "2 1"
+tag:
+  - int/operation/bit_count
+  - int/literal
+
+---
+
+code: |
+  a = 1 - .1
+
+  print(int(a))
+output: "0"
+tag:
+  - int
+  - build-in/int
+
+---
+
+code: |
+  a, b = 424411453, 3122871
+  lst = divmod(a, b)
+  res = lst[0] * b + lst[1]
+
+  print(res == a)
+output: "2 1"
+tag:
+  - int/operation/divmod
+  - int/literal
+
+---
+
+code: |
+  a = 0
+  for x in range(5):
+    a -= -abs(-x)
+    
+  print(a)
+output: "10"
+tag:
+  - int/operation/abs
+  - int/operation/negation
+
+---
+
+code: |
+  print(pow(2, 3, 3))
+output: "2"
+tag:
+  - int/operation/modular_exponentiation
+
+---
+
+code: |
+  a = str(bin(4))
+  b = str(bytes(4))
+
+  print(a == b)
+output: "False"
+tag:
+  - int/operation/bin
+  - build-in/bytes
+  - build-in/str
+
+---
+code: |
+  a = 101 ** 100
+  b = 95. ** 100
+
+  print(type(a) == type(b))
+output: "False"
+tag:
+  - int/operation/pow
+  - float/operation/pow
+  - build-in/type

@@ -1,0 +1,296 @@
+code: |
+  a = [[] * 2] * 2
+  a[0].append(1)
+
+  print(a)
+output: "[[1], [1]]"
+tag:
+  - object/reference
+  - list/operation/append
+  - list/operation/multiply, 
+
+---
+
+code: |
+  a = [[0]*2]*2
+  a[0][0] = 5
+
+  print(a)
+output: "[[5, 0], [5, 0]]"
+tag:
+  - object/reference
+  - list/operation/multiply
+
+---
+
+code: |
+  a = [1, 2, 3]
+  b = a[:]
+
+  print(a == b, id(a) == id(b))
+output: "True False"
+tag:
+  - object/identify
+
+---
+
+code: |
+  a = [2, 4, 3]
+  b = sorted(a)
+  b.insert(0, 1)
+
+  print(a[0])
+output: "2"
+tag:
+  - object/reference
+
+---
+
+code: |
+  def f(a, x):
+    return a.x + x
+
+  class Obj:
+    def f(self, x):
+      self.x = x
+      return x + 2
+
+  obj = Obj()
+
+  print(f(obj, obj.f(2)))
+output: "6"
+tag:
+  - object/variable
+
+---
+
+code: |
+  a = 4
+  b = a
+  del a
+  a = 2
+
+  print(b == 2)
+output : "False"
+tag:
+  - object/reference
+
+---
+
+code: |
+  class ABC:
+    def __repr__(self):
+      return 'abc'
+    
+    def __str__(self):
+      return 'abc'
+
+  a = 'abc'
+  b = ABC()
+
+  print(a == b)
+output: "False"
+tag:
+  - object/compare
+
+---
+
+code: |
+  class A:
+    def __init__(self, name):
+      self.__name = name
+
+    def greeting(self):
+      print(self.__name)
+
+  class B(A):
+    def __init__(self):
+      pass
+    
+  b = B("Anton")
+  b.greeting()
+output: "NameError: name 'Anton' is not defined"
+tag:
+  - object/variable
+
+---
+
+code: |
+  class A:
+    def __init__(self, name):
+      __name = name
+
+    def greeting(self):
+      print(__name)
+
+  a = A("Anton")
+  a.greeting()
+output: "AttributeError: name '_A__name' is not defined"
+tag:
+  - object/variable
+
+---
+
+code: |
+  class B:
+    def __printer(self):
+      print("Hello")
+
+  b = B()
+  b.__printer()
+output: "AttributeError: 'B' object has no attribute '__printer'"
+tag:
+  - object/access_identifier
+
+---
+
+code: |
+  class Soda:
+    def __init__(self, ingredient):
+      self.ingredient = ingredient if isinstance(ingredient, str) else None
+
+    def show_my_drink(self):
+      if self.ingredient:
+        print(f'Soda and {self.ingredient}')
+      else:
+        print('Regular soda')
+
+  drink1 = Soda('raspberry')
+  drink2 = Soda(5)
+  print(drink1.show_my_drink(), drink2.show_my_drink())
+output: "Soda and raspberry Regular soda None None"
+tag:
+  - object/variable
+
+---
+
+code: |
+  a = [5, 3, []]
+  b = [5, 3, []]
+
+  print(a[-1] is b[-1])
+output: "False"
+tag:
+  - object/identify
+
+---
+
+code: |
+  x = ["name", "id", "balance", "date"]
+  x1 = x[:]
+  x2 = x.copy()
+
+  print(x1 == x2, x1 is x2)
+output: "True False"
+tag:
+  - object/compare 
+  - object/identify
+
+---
+
+code: |
+  h = "Hola"
+  el1 = set(h)
+  el2 = set(h)
+
+  print(el1 is el2)
+output: "False"
+tag:
+  - object/identify
+
+---
+
+code: |
+  class Test:
+    test = 5
+
+    def init(self, test):
+      self.test = test
+
+  obj = Test(5)
+
+  print(Test.test is obj.test)
+output: "TypeError: Test() takes no arguments"
+tag:
+  - object/identify
+
+---
+
+code: |
+  class Point:
+    def __init__(self, name, x, y):
+      self.name = name
+      self.x = x
+      self.y = y
+
+    def __str__(self):
+      return '{}({}, {})'.format(self.name, self.x, self.y)
+  
+  points = [Point('A', 0, 3), Point('B', 4, 0)]
+  print(points[0])
+output: "A(0, 3)"
+tag: 
+ - object/reference
+
+---
+
+code: |
+  import copy
+
+  list1 = [1, 2, 3, [1, 5], ]
+  list2 = copy.copy(list1)
+  list2[3][0] = 2
+  print(list1, list2)
+output: "[1, 2, 3, [2, 5]] [1, 2, 3, [2, 5]]"
+tag: 
+ - object/reference  
+ - list/literal
+
+---
+
+code: |
+  class NumOperations():
+  def __init__(self, math_list):
+    self.math_list = math_list
+
+  def __mul__(self, other):
+    mullst = [x * y for x, y in zip(self.math_list, other.math_list)]
+    return NumOperations(mullst)
+
+  q = NumOperations([1, 1, 0]) * NumOperations([10, 9, 8])
+  print('Multiplication: ' , q.math_list)
+output: "[10, 9, 0]"
+tag: 
+  - object/reference
+  - list/operation/multiply
+
+---
+
+code: |
+  mylist1 = [[],[-1]]
+  mylist2 = [[],[-1]]
+  mylist2.sort()
+  print(mylist1 is mylist2)
+output: "False"
+tag: 
+ - object/identify
+ - list/operation/append
+
+---
+
+code: |
+  L = [[[[5, 6], [3, 4]], [1, 2]],[8, 8]]
+  print(L[0][1:], L[0][0][-1][1])
+output: "[[1, 2]] 4"
+tag: 
+ - object/reference  
+
+---
+
+code: |
+  L = [[1, 2, [3, 4]], [[3, 4, 5], [1, 2]]]
+  print(L[0] is L[1])
+output: "False"
+tag: 
+ - object/reference 
+ - object/identify

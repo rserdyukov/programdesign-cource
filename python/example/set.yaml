@@ -1,0 +1,276 @@
+code: |
+  a = {1, True, '1'}
+
+  print(len(a))
+output: "2"
+tag:
+  - set/literal
+  - set/operation/length
+
+---
+
+code: |
+  words = {'user', 'billy',
+      'password', 'text'}
+
+  print(words['password'])
+output: "TypeError: 'set' object is not subscriptable"
+tag:
+  - set/operation
+
+---
+
+code: |
+  lst1 = [x for x in range(6)]
+  lst2 = [y for y in range(9)]
+  a = lst1 + lst2
+
+  print(*a)
+output: "0 1 2 3 4 5 6 7 8"
+tag:
+  - set
+  - list/comprehension
+  - build-in/set
+
+---
+
+code: |
+  s1 = {1, 2, 3, 4, 5}
+  s2 = {3, 4, 5}
+
+  print(len(s2 - s1))
+output: "0"
+tag: 
+  - set/operation/difference
+
+---
+
+code: |
+  a = {1, 2, 3, 4, 5}
+  b = {1, 2, 3, 4, 5}
+
+  print(b.issuperset(a))
+output: "True"
+tag: 
+  - set/operation/issuperset
+
+---
+
+code: |
+  a = {1, 2, 3}
+  b = {1, 2, 3, 4, 5}
+
+  print(a & b | a)
+output: "{1, 2, 3}"
+tag:
+  - set/operation/definition
+  - set/operation/addition
+
+---
+
+code: |
+  a = {1, 2, 3, 4, 5}
+  b = {1, 2, 3}
+
+  print(a | b & a)
+output: "{1, 2, 3, 4, 5}"
+tag:
+  - set/operation/definition
+  - set/operation/addition
+
+---
+
+code: |
+  a = {5, 4, 3, 2, 1}
+  b = {1, 2, 3, 6}
+  c = {7, 4, 2, 1}
+  c = c.union(a & b)
+
+  print(c)
+output: "{1, 2, 3, 4, 7}"
+tag:
+  - set/operation/union
+  - set/operation/definition
+
+---
+
+code: |
+  a = {5, 4, 3, 2, 1}
+  b = {1, 2, 3, 6}
+  c = {7, 4, 2, 1}
+  c = c.symmetric_difference(a | b)
+
+  print(c)
+output: "{3, 5, 6, 7}"
+tag:
+  - set/operation/symmetric_difference
+  - set/operation/addition
+
+---
+
+code: |
+  shop_list1 = {"apple", "cheese", "milk", "yogurt", "juice"}
+  shop_list2 = {"banana", "coffee", "cacao", "milk", "tomato", "cheese"}
+
+  print(*shop_list1.intersection(shop_list2))
+output: "'milk' 'cheese'"
+tag:
+  - set/operation/intersection
+
+---
+
+code: |
+  shop_list1 = {"apple", "cheese", "milk", "yogurt", "juice"}
+  shop_list2 = {"banana", "coffee", "cacao", "milk", "tomato", "cheese"}
+  shop_list1.intersection_update(shop_list2)
+
+  print(shop_list1)
+output: "{'milk', 'cheese'}"
+tag:
+  - set/operation/intersection_update
+
+---
+
+code: |
+  lang1 = {"C++", "C", "C#", "Java", "Perl"}
+
+  lang2 = lang1.copy()
+  lang2.update(
+    ["C", "Python", "C++",  "JavaScript", "PHP"]
+  )
+
+  print(*lang2.difference(lang1))
+output: "'JavaScript' 'PHP' 'Python'"
+tag:
+  - set/operation/difference
+  - set/operation/update
+
+---
+
+code: |
+  lang1 = {"C++", "C", "C#", "Java", "Perl"}
+  lang2 = ["C", "Python", "C++",  "JavaScript", "TypeScript", "PHP"]
+
+  print(lang1.isdisjoint(lang2))
+output: "False"
+tag:
+  - set/operation/isdisjoint
+
+---
+
+code: |
+  cities1 = {"New York", "Toronto", "Cape Town", "Sao Paulo"}
+  cities2 = {"Istanbul", "New York", "Caracas", "Cape Town"}
+  
+  print(cities2.symmetric_difference(cities1))
+output: "{'Toronto', 'Caracas', 'Istanbul', 'Sao Paulo'}"
+tag:
+  - set/operation/symmetric_difference
+
+---
+
+code: |
+  a = {3, 2, 1}
+  b = {1, 2, 3}
+
+  print(a.union(b).index(3))
+output: "AttributeError: 'set' object has no attribute 'index'"
+tag:
+  - set/operation/union 
+
+---
+
+code: |
+  a = set("Hello")
+
+  print(a[-1::-1])
+output: "TypeError: 'set' object is not subscriptable"
+tag:
+  - set
+
+---
+
+code: |
+  a = {el for el in "bacb-bd77-1abd-ac8b" if not el.isdigit()}
+
+  print(a)
+output: "{'-', 'b', 'c', 'd', 'a'}"
+tag:
+  - set/comprehension
+
+---
+
+code: |
+  ids = {1, 2, 3, 4, 3}
+
+  print(ids[2])
+output: "TypeError: 'set' object is not subscriptable"
+tag:
+  - set/comprehension
+
+---
+
+code: |
+  lst = [1, 'non-empty string', True, '', False, 0, None]
+  st = set(lst)
+
+  print(len(st))
+output: "5"
+tag:
+  - set/comprehension
+  - boolean/literal
+
+---
+
+code: |
+  fruits = {"apple", "banana", "cherry"}
+  fruits.add("orange")
+
+  print(fruits)
+output: "{'orange', 'apple', 'cherry', 'banana'}"
+tag:
+  - set/operation/add
+
+---
+
+code: |
+  fruits = {"apple", "banana", "cherry"}
+  fruits.add("banana")
+
+  print(fruits)
+output: "{'cherry', 'banana', 'apple'}"
+tag:
+  - set/operation/add
+
+---
+
+code: |
+  fruits = {"apple", "banana", "cherry"}
+  fruits.clear()
+
+  print(fruits)
+output: "set()"
+tag:
+  - set/operation/clear
+
+---
+
+code: |
+  fruits = {"apple", "banana", "cherry"}
+  fruits.remove("orange")
+
+  print(fruits) 
+output: "KeyError: 'orange'"
+tag:
+  - set/operation/remove
+
+---
+
+code: |
+  fruits = {"apple", "banana", "cherry"}
+  fruits.discard("orange")
+
+  print(fruits)
+output: "{'apple', 'banana', 'cherry'}"
+tag:
+  - set/operation/discard

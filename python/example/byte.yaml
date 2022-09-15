@@ -1,0 +1,55 @@
+code: |
+  a = bytes(range(3)).hex()
+
+  print(a)
+output: "000102"
+tag:
+  - byte
+  - byte/operation/hex
+  - build-in/range
+
+---
+
+code: |
+  a = bytes(1)
+  b = b'\x00'
+  c = b'\x01'
+
+  print(a == b)
+  print(a == c)
+output: "True False"
+tag:
+  - byte/literal
+  - byte/operation/compare
+
+---
+
+code: |
+  a = b'\x00'
+  b = b'\x01'
+
+  print(a + b)
+output: "b'\\x00\\x01'"
+tag:
+  - byte/literal
+  - byte/operation/add
+
+---
+
+code: |
+  print(b'что выведет этот принт?')
+output: "SyntaxError: bytes can only contain ASCII literal characters"
+tag:
+  - byte/literal
+
+---
+
+code: |
+  a = 'a'.encode()
+  b = b'a'
+
+  print(a == b)
+output: "True"
+tag:
+  - byte/literal
+  - string/operation/encode

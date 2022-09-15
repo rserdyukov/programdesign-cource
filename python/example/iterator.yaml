@@ -1,0 +1,74 @@
+code: |
+  numbers = [100, 200, 300]
+  iterator = iter(numbers)
+
+  print(len(iterator))
+output: "TypeError: object of type 'list_iterator' has no len()"
+tag:
+  - iterator
+  - build-in/len
+
+---
+
+code: |
+  numbers = [100, 200, 300]
+  iterator1 = iter(numbers)
+  iterator2 = iter(iterator1)
+
+  print(iterator1 is iterator2)
+output: "True"
+tag:
+  - iterator
+
+---
+
+code: |
+  def custom_chain(*iterables):
+    for iterable in iterables:
+      yield from iterable
+  
+  for x in custom_chain([1, 2, 3], 'abc'):
+    print(x, end=' ')
+output: "1 2 3 a b c"
+tag:
+  - iterator
+  - build-in/yield
+
+---
+
+code: |
+  scores: dict = {'John': 99, 'Danny': 95}
+
+  iter_scores = iter(scores)
+
+  print(type(iter_scores))
+output: "<class 'dict_keyiterator'>"
+tag:
+  - iterator #build-in/dict
+
+---
+
+code: |
+  def custom_chain(*iterables):
+    for iterable in iterables:
+      yield from iterable
+  
+  for x in custom_chain([1, 2, 3], 'abc'):
+    print(x, end=' ')
+output: "1 2 3 a b c"
+tag:
+  - iterator
+  - build-in/yield
+
+---
+
+code: |
+  scores: dict = {'John': 99, 'Danny': 95}
+  iter_scores = iter(scores)
+
+  print(type(iter_scores))
+output: "<class 'dict_keyiterator'>"
+tag:
+  - iterator
+  - build-in/type
+  - build-in/dict

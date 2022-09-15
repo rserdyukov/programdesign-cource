@@ -1,0 +1,304 @@
+code: |
+  a = 'Python best'
+  a[a.index('t')] = 'd'
+
+  print(a)
+output: "TypeError: 'str' object does not support item assignment"
+tag:
+  - string/immutable
+
+---
+
+code: |
+  print(sum('Lorem ipsum', ''))
+output: "TypeError: sum() can't sum strings [use ''.join(seq) instead]"
+tag:
+  - string/concatenation
+  - built-in/sum
+
+---
+
+code: |
+  a = "Hello, World"
+
+  print(a[:6:2])
+output: "Hlo"
+tag:
+  - string/operation/slice
+
+---
+
+code: |
+  st = "spam"
+
+  print(st[:-1:])
+output: "spa"
+tag:
+  - string/operation/slice
+
+---
+
+code: |
+  st = "spam"
+
+  print(st[-1::-1])
+output: "maps"
+tag:
+  - string/operation/slice
+
+---
+
+code: |
+  print("abbzxyzxzxabb".count("abb", -10, -1))
+output: "0"
+tag:
+  - string/operation/count
+
+---
+
+code: |
+  arr = (1, 2, 3)
+  s = str(arr)
+
+  print(s[4:10])
+output: "2, 3)"
+tag:
+  - string/operation/slice
+  - build-in/str
+
+---
+
+code: |
+  s = "python"
+
+  print(len(s * 2 + ''))
+output: "12"
+tag:
+  - string/operation/multiple
+  - build-in/len
+
+---
+
+code: |
+  a = "Good morning!"
+  b = a.zfill(20)
+  if b != a:
+    print(a, b)
+output: "'Good morning!' '0000000Good morning!'"
+tag:
+  - string/operation/zfill
+
+---
+
+code: |
+  txt = "For only {price:.2f} dollars!"
+
+  print(txt.format(price=49)) 
+output: "For only 49.00 dollars!"
+tag:
+  - string/operation/format
+
+---
+
+code: |
+  s = "Python3 is a lot better than Python2."
+
+  print(s.rfind("Python"))
+output: "29"
+tag:
+  - string/operation/rfind
+
+---
+
+code: |
+  s = "Python3 is a lot better than Python2."
+
+  print(s.rpartition("Python"))
+output: "('Python3 is a lot better than ', 'Python', '2.')"
+tag:
+  - string/operation/rpartition
+
+---
+
+code: |
+  s = "Python3 is a lot better than Python2."
+
+  print(s.partition("Python"))
+output: "('', 'Python', '3 is a lot better than Python2.')"
+tag:
+  - string/operation/partition
+
+---
+
+code: |
+  a = "P".format("y")
+
+  print(a)
+output: "P"
+tag:
+  - string/operation/format
+
+---
+
+code: |
+  b = "{2}{0}".format("p", "y", "p")
+
+  print(b)
+output: "pp"
+tag:
+  - string/operation/format
+
+---
+
+code: |
+  st = 'hello'
+  indx = st.index('l')
+  st[indx] = 'p'
+
+  print(st)
+output: "TypeError: 'str' object does not support item assignment'"
+tag:
+  - string/immutable
+
+---
+
+code: |
+  what = """i"""
+  up = 'i'
+  print(what is up)
+output: "True"
+tag:
+  - string/operation/is
+
+---
+
+code: |
+  lst = []
+  lst = 'a'
+  lst *= 2
+
+  print(lst)
+output: "aa"
+tag:
+  - string/operation/multiply
+
+---
+
+code: |
+  values = '' or None
+
+  print(values)
+output: "None"
+tag:
+  - string/operation/empty_value
+
+---
+
+code: |
+  a = '1'.encode()
+  b = (1).encode()
+
+  print(a == b)
+output: "AttributeError: 'int' object has no attribute 'encode'"
+tag:
+  - string/operation/encode
+
+---
+
+code: |
+  txt = "The best things in life are free!"
+
+  print("free" in txt)
+output: "True"
+tag:
+  - expression/operation/in
+  - string/literal
+
+---
+
+code: |
+  a = '1'.encode()
+  b = (1).encode()
+
+  print(a == b)
+output: "AttributeError: 'int' object has no attribute 'encode'"
+tag:
+  - string/operation/encode
+
+---
+
+code: |
+  txt = "hello, my name is Peter, I am 26 years old"
+  x = txt.split(", ")
+
+  print(x)
+output: "['hello', 'my name is Peter', 'I am 26 years old']"
+tag:
+  - string/operation/split
+
+---
+
+code: |
+  txt = "apple#banana#cherry#orange"
+  x = txt.split("#", 1)
+
+  print(x)
+output: "['apple', 'banana#cherry#orange']"
+tag:
+  - string/operation/split
+
+---
+
+code: |
+  txt = "Thank you for the music\nWelcome to the jungle\n"
+  x = txt.splitlines()
+
+  print(x)
+output: "['Thank you for the music', 'Welcome to the jungle']"
+tag:
+  - string/operation/splitlines
+
+---
+
+code: |
+  txt = "Thank you for the music\nWelcome to the jungle"
+  x = txt.splitlines(True)
+
+  print(x)
+output: "['Thank you for the music\n', 'Welcome to the jungle']"
+tag:
+  - string/operation/splitlines
+
+---
+
+code: |
+  mydict = {83:  80}
+  txt = "Hello Sam!"
+
+  print(txt.translate(mydict))
+output: "Hello Pam!"
+tag:
+  - string/operation/translate
+
+---
+
+code: |
+  txt = "Hi Sam!"
+  x = "mSa"
+  y = "eJo"
+  mytable = txt.maketrans(x, y)
+
+  print(txt.translate(mytable))
+output: "Hi Joe!"
+tag:
+  - string/operation/maketrans
+  - string/operation/translate
+
+---
+
+code: |
+  txt = ",,,,,rrttgg.....banana....rrr"
+  x = txt.strip(",.grt")
+output: "banana"
+tag:
+  - string/operation/strip

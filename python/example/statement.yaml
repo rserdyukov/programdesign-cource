@@ -1,0 +1,457 @@
+code: |
+  a, *b, c = [1, 2, 3, 4, 5]
+
+  print(a, b, c)
+output: "1 [2, 3, 4] 5"
+tag:
+  - statement/assignment
+
+---
+
+code: |
+  a, *b, c = [1, 2]
+
+  print(a, b, c)
+output: "1 [] 2"
+tag:
+  - statement/assignment
+ 
+---
+
+code: |
+  word1 = 'welcome'
+  word2 = 'home'
+  r = list()
+
+  for x in word1:
+    for x in word2:
+      r.append(x)
+
+  print(r[2] + r[1] + r[2])
+output: "mom"
+tag:
+  - statement/for
+
+---
+
+code: |
+  a = [1, 2, 3]
+  b = a
+  del a
+
+  print(b)
+output: "[1, 2, 3]"
+tag:
+  - statement/del
+
+---
+
+code: |
+  numbers = [2, 3, 1, -2, 0]
+
+  for i in enumerate(numbers):
+    if i[0] == 0:
+      if i[1] == 0:
+        print(i)
+    else:
+      continue
+
+  print(i)
+output: "(4,0)"
+tag:
+  - statement/for
+  - build-in/enumerate
+
+---
+
+code: |
+  a = [0, 2, -4, -2, 1]
+
+  for i in a:
+    if i < 0:
+      a.append(abs(i))
+    x = i
+
+  print(x)
+output: "2"
+tag:
+  - statement/for
+
+---
+
+code: |
+  a = 0
+
+  for i in range(10):
+    if i == 0:
+      a = 13
+    else:
+      a =- 1
+
+  print(a)
+output: "-1"
+tag:
+  - statement/for
+
+---
+
+code: |
+  try:
+    raise IndexError
+  except IndexError:
+    print("Получаем исключение")
+  else:
+    print("Ловим его")
+output: "Получаем исключение"
+tag:
+  - statement/try
+
+---
+
+code: |
+  def f():
+    try: 
+      return 1
+    finally:
+      return 2
+
+  print(f())
+output: "2"
+tag:
+  - statement/try
+
+---
+
+code: |
+  a = {(13, 3), "qwer", 67, 1, 5, 33, 2, 7, "youths"}
+  b = ["python"]
+
+  for el in a:
+    b.append(el)
+  else:
+    a.union(b)
+    
+  print(a)
+output: "{1, 2, 67, 33, 5, 'python', 7, (13, 3), 'youths', 'qwer'}"
+tag:
+  - statement/for
+
+---
+
+code: |
+  lst = [15, 30, 11, 12, 9, 0, 6, 4, 12, 13]
+  free_list = ["free list"]
+  last_element = 0
+  n = 0
+
+  while not any(free_list):
+    free_list.append(lst[n])
+    n += 1
+  else:
+    last_element = free_list.pop()
+    
+  print(last_element)
+output: "'free list'"
+tag:
+  - statement/while
+
+---
+
+code: |
+  def foo(value):
+    num = 12
+    try:
+    num //= value
+    except:
+    num = 3
+    else:
+    num = 4
+    finally:
+    num = 5
+    return num
+
+  print(foo(0))
+output: "5"
+tag:
+  - statement/try,  #statement/try/else
+  - statement/try/finally
+
+---
+
+code: |
+  count = 0
+  for letter in 'foo':
+    count+=1
+  else:
+    print(count)
+output: "3"
+tag:
+  - statement/for/else
+
+---
+
+code: |
+  def foo(value):
+    num = 12
+    try:
+    num //= value
+    except:
+    num = 3
+    else:
+    num = 4
+    return num
+
+  print(foo(4))
+output: "4"
+tag:
+  - statement/try
+  - statement/try/else
+
+---
+
+code: |
+  numbers = [10, 40, 120, 230]
+  for i in numbers:
+    if i > 100:
+      print(i)
+      break
+output: "120"
+tag:
+  - statement/break
+
+---
+
+code: |
+  assert "hello, world" is True
+output: "AssertionError"
+tag:
+  - statement/assert
+  - expression/operation/is
+  - boolean/literal
+
+---
+
+code: |
+  x = 10
+  y = 30
+  del x, y
+
+  print(x, y)
+output: "NameError: name 'x' is not defined"
+tag:
+  - statement/del
+
+---
+
+code: |
+  value = True
+  assert value == True 
+output: "''"
+tag:
+  - statement/assert
+  - boolean/literal
+  - boolean/operation/compare
+
+---
+
+code: |
+  def user_check(choice):
+    if choice == 1:
+      print("Admin")
+    elif choice == 2:
+      print("Editor")
+    elif choice == 3:
+      print("Guest")
+    else:
+      print("Wrong entry")
+
+  user_check(4)
+output: "Wrong entry"
+tag:
+  - statement/if
+
+---
+
+code: |
+  num = 10
+  sum = 0
+  i = 1
+  while i <= num:
+    sum = sum + i
+    i = i + 1
+
+  print(sum)
+output: "55"
+tag:
+  - statement/while
+
+---
+
+code: |
+  try:
+    print(1 / 0)
+  except:
+    raise RuntimeError("Something bad happened")
+output: "ZeroDivisionError: division by zero"
+tag:
+  - statement/raise
+  - statement/try
+
+---
+
+code: |
+  import math as m
+
+  print(m.sqrt(64))
+output: "8.0"
+tag:
+  - statement/as
+  - statement/import
+
+---
+
+code: |
+  numbers = [2, 3, 11, 7]
+  for i in numbers:
+    if i > 10:
+      continue
+    square = i * i
+
+  print(square)
+output: "49"
+tag:
+  - statement/continue
+
+---
+
+code: |
+  odd = [1, 5, 7, 9]
+  even = [i + 1 for i in odd if i % 2 == 1]
+
+  print(even[2])
+output: "8"
+tag:
+  - statement/for
+
+---
+
+code: |
+  a, b = 1, 0
+  count = 0
+
+  try:
+    print(a/b)
+  except ZeroDivisionError:
+    count += 1
+  else:
+    count += 2
+  finally:
+    count += 3
+
+  print(count)
+output: "4"
+tag:
+  - statement/try/except
+
+---
+
+code: |
+  def numbers_range(n):
+    for i in range(n):
+      yield i
+  
+  a = numbers_range(4)
+
+  print(next(a))
+output: "0"
+tag:
+  - statement/yield
+  - generator/definition
+
+---
+
+code: |
+  value = True
+  if value is not False:
+    print("False")
+  else:
+    print("True")
+output: "False"
+tag:
+  - statement/not
+  - statement/is
+  - boolean/literal
+
+---
+
+code: |
+  def get_even(numbers):
+    return [num for num in numbers if not num % 2]
+
+  print(len(get_even([1, 2, 3, 4, 5, 6])))
+output: "3"
+tag:
+  - statement/return
+
+---
+
+code: |
+  x = "hello"
+
+  if not type(x) is int:
+    raise TypeError("Only integers are allowed")
+output: "TypeError: Only integers are allowed"
+tag:
+  - statement/raise
+
+---
+
+code: |
+  values = []
+
+  for i in range(10):
+    if i < 4:
+    continue
+    values.append(i)
+
+  print(values)
+output: "[4, 5, 6, 7, 8, 9]"
+tag:
+  - statement/for
+  - statement/continue
+  - expression/operation/smaller
+
+---
+
+code: |
+  idx = 15
+  msg = 'message'
+  if idx % 15 == 0:
+    pass
+  elif idx % 5 == 0:
+    msg = 'Buzz'
+  else:
+    pass
+
+  print(msg)
+output: "message"
+tag:
+  - statement/pass
+
+---
+
+code: |
+  def foo():
+    x = 20
+
+    def bar():
+      global x
+      x = 25
+    bar()
+
+  foo()
+
+  print(x)
+output: "25"
+tag:
+  - statement/global

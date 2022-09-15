@@ -1,0 +1,86 @@
+# Список тэгов
+
+- type
+  - annotation
+- int
+  - literal
+  - operation
+- boolean
+  - literal
+  - operation
+- float
+  - literal
+  - operation
+- list
+  - literal
+  - operation
+    - slice
+    - ...
+- string
+  - literal
+  - operation
+- byte
+  - literal
+  - operation
+- dict
+  - literal
+  - operation
+- set
+  - literal
+  - operation
+    - length
+    - ...
+- tuple
+  - literal
+  - operation
+- function
+  - parameter
+  - attributes
+  - lambda
+  - inner
+- generator
+  - definition
+- scope
+- object
+  - special method
+- class
+  - definition
+- [build-in](build-in.yaml)
+  - enumerate
+  - filter
+  - map
+  - zip
+  - list
+  - slice
+  - dict
+  - set
+  - tuple
+  - len
+  - min
+  - max
+  - sum
+  - reversed
+  - int
+  - float
+  - range
+  - divmod
+  - pow
+  - bool
+  - setattr
+  - getattr
+  - isinstance
+  - issubclass
+  - any
+  - all
+  - iter
+  - next
+  - print
+- expression
+  - priority
+  - operation
+    - modulo
+    - ...
+- statement
+  - assignment
+  - if
+  - ...

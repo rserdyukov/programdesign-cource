@@ -1,0 +1,504 @@
+code: |
+  words = ['python', 'programmer', 'quizzes']
+
+  for index, value in enumerate(words):
+    if index % 2 == 0:
+      print(value)
+      break
+output: "python"
+tag:
+  - built-in/enumerate
+  - expression/operation/modulo
+
+---
+
+code: |
+  lst = []
+  lst.append(lst)
+
+  print(lst)
+output: "[[...]]"
+tag:
+  - build-in/print
+
+---
+
+code: |
+  l = [[1, 2], [3, 4, 5]]
+  print(sum(l, []))
+output: "[1, 2, 3, 4, 5]"
+tag:
+  - build-in/sum
+
+---
+
+code: |
+  print(callable(print))
+output: "True"
+tag:
+  - build-in/callable
+
+---
+
+code: |
+  list_of_tuple = [('bob', 35, 'mgr'), ('sue', 40, 'dev')]
+
+  data = list(map((lambda row: row[2]), list_of_tuple))
+
+  print(data)
+output: "['mgr', 'dev']"
+tag:
+  - build-in/map
+  - build-in/list
+  - list/literal
+  - tuple/literal
+  - lambda
+
+---
+
+code: |
+  x = None
+  print(bool(x))
+output: "False"
+tag:
+  - build-in/bool
+  - build-in/print
+  - boolean
+
+---
+
+code: |
+  lst = [4.6, 2.3, 7.8]
+  a = list([2, 5.9])
+
+  for num in lst:
+    a.append(int(num))
+
+  print(a)
+output: "[2, 5.9, 4, 2, 7]"
+tag:
+  - build-in/int
+  - build-in/list
+  - list/operation/append
+
+---
+
+code: |
+  lst = [(2, 3), (2, 9), (5, 0)]
+
+  a = dict(lst)
+
+  print(a)
+output: "{2: 9, 5: 0}"
+tag:
+  - build-in/dict
+  - build-in/int
+  - list/literal
+  - tuple/literal
+
+---
+
+code: |
+  lst = [3, 1, 2, 4, 1]
+
+  sum_of_num = sum(lst, start=2)
+
+  print(sum_of_num)
+output: "13"
+tag:
+  - build-in/sum
+  - list/literal
+
+---
+
+code: |
+  lst = [-4, 0, 2, '', 7, 'a', ' ', -4]
+
+  b = list(filter(None, lst))
+
+  print(b)
+output: "[-4, 2, 7, 'a', ' ', -4]"
+tag:
+  - build-in/filter
+  - build-in/list
+  - list/literal
+
+---
+
+code: |
+  def check(x):
+    if x % 2 == 0:
+      return 1
+
+
+  lst = [2, 1, 4, 5, 3]
+
+  a = list(filter(check, lst))
+
+  print(a)
+output: "[2, 4]"
+tag:
+  - build-in/filter
+  - build-in/list
+  - expression/operation/modulo
+  - list/literal
+
+---
+
+code: |
+  lst = [3, 4, 'a', -1]
+
+  a = sorted(lst, reverse=True)
+
+  print(a)
+output: "TypeError: '<' not supported between instances of 'str' and 'int'"
+tag:
+  - build-in/sorted
+  - list/literal
+
+---
+
+code: |
+  st = {1, 5, 6, 5}
+
+  a = tuple(st)
+
+  print(a)
+output: "(1, 5, 6)"
+tag:
+  - build-in/tuple
+  - set/literal
+
+---
+
+code: |
+  tpl = (4, 1, 0, 'a')
+
+  a = any(tpl)
+
+  print(a)
+output: "True"
+tag:
+  - build-in/any
+  - tuple/literal
+  - boolean
+
+---
+
+code: |
+  lst = [2, 5, 5, 1, 3]
+
+  itr = iter(lst)
+
+  a = next(itr)
+  b = next(itr)
+
+  print(a, b)
+output: "2 5"
+tag:
+  - build-in/iter
+  - build-in/next
+  - list/literal
+
+---
+
+code: |
+  print('a' 'b' 'c' 'd')
+output: "abcd"
+tag:
+  - build-in/print
+
+---
+
+code: |
+  lst = [1, 2, 3, 4]
+
+  r = 1
+
+  for i in range(len(lst)):
+    r *= i
+
+  print(r)
+output: "0"
+tag:
+  - build-in/range
+
+---
+
+code: |
+  print(list(range(2, 15, 3)))
+output: "[2, 5, 8, 11, 14]"
+tag:
+  - build-in/range
+  - build-in/list
+
+---
+
+code: |
+  print(all([]))
+output: "True"
+tag:
+  - build-in/all
+
+---
+
+code: |
+  func = lambda x : x % 2 == 0
+  nums = filter(func, range(17))
+  print(len(nums) + min(nums))
+output: "TypeError: object of type 'filter' has no len()"
+tag:
+  - build-in/filter
+
+---
+
+code: |
+  lst = [3, 1, 4, 'a', 2]
+
+  a = tuple(reversed(lst))
+
+  print(a)
+output: "(2, 'a', 4, 1, 3)"
+tag:
+  - build-in/reversed
+  - build-in/tuple
+  - list/literal
+
+---
+
+code: |
+  dct = {3: 4, -1: 9, 4: 1, -2: 4}
+
+  num = max(dct, key=lambda k: dct[k])
+
+  print(num)
+output: "-1"
+tag:
+  - build-in/max
+  - lambda
+  - dict/literal
+
+---
+
+code: |
+  lst_1 = [2, 5, 9, 0]
+  lst_2 = [2, 5, 9]
+
+  res = min(lst_1, lst_2)
+
+  print(res)
+output: "[2, 5, 9]"
+tag:
+  - build-in/min
+  - list/literal
+
+---
+
+code: |
+  a = pow(2, 3, 10)
+
+  print(a)
+output: "8"
+tag:
+  - build-in/pow
+
+---
+
+code: |
+  str = 'abc'
+  num = (10, 20, 30, 40)
+
+  a = list(zip(str, num))
+
+  print(a)
+output: "[('a', 10), ('b', 20), ('c', 30)]"
+tag:
+  - build-in/zip
+  - build-in/list
+  - tuple/literal
+
+---
+
+code: |
+  first, second = zip(*[(1, 4), (2, 5), (3, 6)])
+
+  print(first, second)
+output: "(1, 2, 3) (4, 5, 6)"
+tag:
+  - build-in/zip
+  - list/literal
+  - tuple/literal
+
+---
+
+code: |
+  dct = {1: 2, 2: 3, 3: 4, 4: [2, 5, 6]}
+
+  b = len(dct)
+
+  print(b)
+output: "4"
+tag:
+  - build-in/len
+  - dict/literal
+
+---
+
+code: |
+  if all([2, 0, 4]):
+    print("Yes")
+  else:
+    print("No")
+output: "No"
+tag:
+  - build-in/all
+  - list/literal
+  - boolean
+
+---
+
+code: |
+  data = [2, 4, 5, 6, {}]
+
+  a = isinstance(data[4], dict)
+
+  print(a)
+output: "True"
+tag:
+  - build-in/isinstance
+  - list/literal
+  - dict
+  - boolean  
+
+---
+
+code: |
+  lst = [1, 2, 3, 4, 5, 6]
+
+  a = lst[slice(0, 5, 2)]
+
+  print(a)
+output: "[1, 3, 5]"
+tag:
+  - build-in/slice
+  - list/literal  
+
+---
+
+code: |
+  class A:
+    pass
+
+  class B(A):
+    pass
+
+
+  print(issubclass(A, B))
+output: "False"
+tag:
+  - build-in/issubclass
+  - class/inheritance
+  - boolean  
+
+---
+
+code: |
+  a = divmod(1, 0)
+
+  print(a)
+output: "ZeroDivisionError: integer division or modulo by zero"
+tag:
+  - build-in/divmod
+
+---
+
+code: |
+  lst = [2, 3, 4, 5]
+
+  print(*lst, sep='!', end='?')
+output: "2!3!4!5?"
+tag:
+  - build-in/print
+  - list/literal
+
+---
+
+code: |
+  num = float()
+
+  print(num)
+output: "0.0"
+tag:
+  - build-in/float
+
+---
+
+code: |
+  vowels = ('a', 'e', 'i', 'o', 'u')
+
+  fSet = frozenset(vowels)
+
+  fSet.add('v')
+output: "AttributeError: 'frozenset' object has no attribute 'add'"
+tag:
+  - build-in/frozenset
+  - tuple/literal
+
+---
+
+code: |
+  class Person:
+    name = 'Petr'
+
+
+  p = Person()
+
+  setattr(p, 'name', 'Roma')
+
+  print(p.name)
+output: "Roma"
+tag:
+  - build-in/setattr
+  - class
+
+---
+
+code: |
+  class Student:
+    marks = 10
+    name = 'Vanya'
+
+
+  person = Student()
+
+  name, marks = getattr(person, 'name'), getattr(person, 'marks')
+
+  print(name, marks)
+output: "Roma"
+tag:
+  - build-in/getattr
+  - class
+
+---
+
+code: |
+  data = ['bread', 'milk', 'butter']
+
+  enumerate_num = enumerate(data, 1)
+
+  print(list(enumerate_num))
+output: "Roma"
+tag:
+  - build-in/enumerate
+  - build-in/list
+  - list/literal
+
+---
+
+code: |
+  a = 5 ** 1000000
+  print(isinstance(a, int))
+output: "True"
+tag:
+  - build-in/isinstance
+  - int/pow

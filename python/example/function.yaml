@@ -1,0 +1,185 @@
+code: |
+  def func(*args):
+    args.append(3)
+    print(*args)
+
+  func(1,2)
+output: "AttributeError: 'tuple' object has no attribute 'append'"
+tag:
+  - function/parameter
+  - tuple/operation
+
+---
+
+code: |
+  mult_value = 2
+  lst = [2, 5, 11, 9]
+
+  iterator = map(lambda x: x * mult_value, lst)
+
+  mult_value = 1
+  lst = [1, 4, 10, 8]
+
+  print(*list(iterator))
+output: "2 5 11 9"
+tag:
+  - function/lambda/closures
+
+---
+
+code: |
+  print((lambda x : x ** 3)((lambda x : x + 2)(1)))
+output: "27"
+tag:
+  - function/lambda
+
+---
+
+code: |
+  def calc_sum(*args, **kwargs):
+    return sum(args, kwargs)
+
+  print(calc_sum(1, 2, a = 3, b = 4))
+output: "TypeError: unsupported operand type(s) for +: 'dict' and 'int'"
+tag:
+  - function/parameter/unpacking
+
+---
+
+code: |
+  def a(a):
+    def b():
+      print(a)
+
+  a(4)()
+output: "TypeError: 'NoneType' object is not callable"
+tag:
+  - function/inner_function
+
+---
+
+code: |
+  def quatro(*x):
+    x.append(x)
+    return x
+
+  print(quatro(1, 2, 3))
+output: "AttributeError: 'tuple' object has no attribute 'append'"
+tag:
+  - function/parameter/unpacking
+
+---
+
+code: |
+  def foo(value = []):
+    value.append('some')
+    return value
+
+  values = []
+  for i in range(3):
+    values.append(foo())
+
+  print(values)
+output: "[['some', 'some', 'some'], ['some', 'some', 'some'], ['some', 'some', 'some']]"
+tag:
+  - function/parameter/default
+
+---
+
+code: |
+  def func(n):
+    return lambda a : a * n
+
+  doubler = func(2)
+
+  print(type(doubler))
+output: "<class 'function'>"
+tag:
+  - function/lambda
+  - build-in/type
+
+---
+
+code: | 
+  print(lambda: True)
+output: "True"
+tag:
+  - function/lambda
+
+---
+
+code: |
+  def func():
+    pass
+
+  print(func())
+output: "None"
+tag:
+  - function
+
+---
+
+code: |
+  def func(**kwargs):
+    return kwargs
+
+  test = func(a=1, b=2, c=3)
+
+  print(test)
+output: "{'a': 1, 'c': 3, 'b': 2}"
+tag:
+  - function
+  - build-in/dict
+
+---
+
+code: |
+  def func(**kwargs):
+    return kwargs
+
+  print(func())
+output: "{}"
+tag:
+  - function
+  - build-in/dict
+
+---
+
+code: |
+  def outer(num):
+    def inner(num1):
+      return num + num1
+    return inner
+
+  otr = outer(100)
+
+  print(otr(200))
+output: "300"
+tag:
+  - function/inner
+
+---
+
+code: |
+  def func(*args):
+    return args
+
+  test = func(1, 2, 3, 'abc')
+
+  print(test)
+output: "(1, 2, 3, 'abc')"
+tag:
+  - function
+  - build-in/tuple
+
+---
+
+code: |
+  def func(*args):
+    return args
+    
+  print(func())
+output: "()"
+tag:
+  - function
+  - build-in/tuple

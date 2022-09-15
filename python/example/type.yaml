@@ -1,0 +1,157 @@
+code: |
+  from typing import Set
+
+  a: Set[int] = {1, 4, 5}
+
+  print(isinstance(a, Set[int]))
+output: "TypeError: Subscripted generics cannot be used with class and instance checks"
+tag:
+  - type/annotation
+  - built-in/isinstance
+
+---
+
+code: |
+  a = (9)
+
+  print(type(a))
+output: "<class 'int'>"
+tag:
+  - int
+  - type
+  - build-in/type
+
+---
+
+code: |
+  a = "Tree",
+
+  print(type(a))
+output: "<class 'tuple'>"
+tag:
+  - tuple
+  - type
+  - build-in/type
+
+---
+
+code: |
+  a = "Hello"
+
+  print(type(type(a)))
+output: "<class 'type'>"
+tag:
+  - type
+  - build-in/type
+
+---
+
+code: |
+  a = (el for el in range(105))
+
+  print(type(a))
+output: "<class 'generator'>"
+tag:
+  - generator
+  - type
+  - build-in/type
+
+---
+
+code: |
+  a = {}
+
+  print(type(a))
+output: "<class 'dict'>"
+tag:
+  - dict
+  - type
+  - build-in/type
+
+---
+
+code: |
+  import math
+
+  x = math.pow(2, 3)
+  y = pow(2, 3)
+
+  print(type(x) == type(y))
+output: "False"
+tag:
+  - type/compare
+
+---
+
+code: |
+  elements = {
+    "key": "value",
+    4: 20,
+    "11": (1, 7, 2)
+  }
+
+  print(type(elements.keys()))
+output: "<class 'dict_keys'>"
+tag:
+  - type
+  - dict/operation/keys
+
+---
+
+code: |
+  elements = {
+    "key": "value",
+    4: 20,
+    "11": (1, 7, 2)
+  }
+
+  print(type(elements.values()))
+output: "<class 'dict_values'>"
+tag:
+  - type
+  - dict/operation/values
+
+---
+code: |
+  a: float = 1
+  b: float = 2
+
+  print((a + b).bit_length())
+output: "2"
+tag:
+  - type/annotation
+  - int/operation/bit_length
+
+---
+code: |
+  a: type = type(type)
+  b = type(int)
+  print(a is b)
+output: "True"
+tag:
+  - type/annotation
+  - build-in/type
+
+---
+
+code: |
+  x = 3+5j
+
+  print(type(x))
+output: "<class 'complex'>"
+tag:
+  - complex
+  - type
+  - build-in/type
+
+---
+
+code: |
+  text = b"Hello, World!!!"
+
+  print(type(text))
+output: "<class 'bytes'>"
+tag:
+  - bytes
+  - type
+  - build-in/type
