@@ -1,0 +1,145 @@
+code: |
+namespace test {
+class testClass {
+  void test();
+};
+
+void func();
+
+struct testStruct {
+  void test();
+};
+}
+tag:
+  - namespace
+
+---
+code: |
+namespace Lib {
+inline namespace Lib_1 {
+template<typename T>
+class A;
+}
+
+template<typename T>
+void g(T) { /* ... */ }
+}
+/* ... */
+struct MyClass { /* ... */ };
+namespace Lib {
+template<>
+class A<MyClass> { /* ... */ };
+}
+
+int main() {
+  Lib::A<MyClass> a;
+  g(a);
+}
+tag: 
+  - namespace
+  - Inline namespace
+
+---
+code: |
+namespace {
+int i; // defines ::(unique)::i
+}
+
+void f() {
+  i++;   // increments ::(unique)::i
+}
+
+namespace A {
+namespace {
+int i;        // A::(unique)::i
+int j;        // A::(unique)::j
+}
+
+void g() { i++; } // A::(unique)::i++
+}
+
+using namespace A; // introduces all names from A into global namespace
+
+void h() {
+  i++;    // error: ::(unique)::i and ::A::(unique)::i are both in scope
+  A::i++; // ok, increments ::A::(unique)::i
+  j++;    // ok, increments ::A::(unique)::j
+}
+tag:
+  - namespace
+  - unnamed namespace
+---
+code: |
+void f();
+namespace A {
+void g();
+}
+
+namespace X {
+using ::f;        // global f is now visible as ::X::f
+using A::g;       // A::g is now visible as ::X::g
+using A::g, A::g; // c++17
+}
+
+void h() {
+  X::f(); // calls ::f
+  X::g(); // calls A::g
+}
+tag:
+  - namespace
+  - Using-declarations/inside other namespace
+---
+code: |
+namespace A {
+void f(int);
+}
+using A::f; // ::f is now a synonym for A::f(int)
+
+namespace A       // namespace extension
+{
+void f(char); // does not change what ::f means
+}
+
+void foo() {
+  f('a'); // calls f(int), even though f(char) exists.
+}
+
+void bar() {
+  using A::f; // this f is a synonym for both A::f(int) and A::f(char)
+  f('a');     // calls f(char)
+}
+tag: 
+  - namespace
+  - Using-declarations/namespace extention
+---
+code: |
+namespace A {
+int i;
+}
+
+namespace B {
+int i;
+int j;
+
+namespace C {
+namespace D {
+using namespace A; // all names from A injected into global namespace
+
+int j;
+int k;
+int a = i;         // i is B::i, because A::i is hidden by B::i
+}
+
+using namespace D; // names from D are injected into C
+// names from A are injected into global namespace
+
+int k = 89; // OK to declare name identical to one introduced by a using
+int l = k;  // ambiguous: C::k or D::k
+int m = i;  // ok: B::i hides A::i
+int n = j;  // ok: D::j hides B::j
+}
+}
+tag: 
+  - namespace
+  - Using-directives
+
