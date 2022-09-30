@@ -1,0 +1,436 @@
+code: |
+  goto Test2;
+  std::cout << "testing" << endl;
+  Test2:
+      std::cout << "At Test2 label." << endl;
+tag:
+  - statement/labeled
+  - statement/jump
+
+code: |
+  int a = 2;
+  switch(a){
+  case 1:
+      std::cout << "first case\n";
+      break;
+  case 2:
+      std::cout << "second case\n";
+      break;
+  default:
+      std::cout << "default case\n";
+  }
+tag:
+  - statement/labeled
+
+code: |
+  int a = 3;
+  switch(a){
+  case 1: 
+      std::cout << "first case lable\n";
+      break;
+  case 2:
+      std::cout << "second case label\n";
+      break;
+  default:
+      std::cout << "default label\n";
+  }
+tag:
+  - statement/labeled
+  - statement/selection
+
+code: |
+  for(int i = 0; i < 5; ++i){
+    std::cout << i << " ";
+  }
+tag:
+  - statement/iteration
+
+code: |
+  int i = 6;
+  while(i--){
+    std::cout << i << " ";
+  }
+tag:
+  - statement/iteration
+
+code: |
+  int i = 1;
+  do{
+    std::cout << i << " ";
+  }while(i--);
+tag:
+  - statement/iteration
+
+code: |
+  std::vector<int> v = {1, 2, 3};
+  for(int i : v){
+    std::cout << i << " ";
+  }
+tag:
+  - statement/iteration
+
+code: |
+  for(int i = 0; i < 5; ++i){
+    std::cout << i << " ";
+    if(i == 3){
+      break;
+    }
+  }
+  std::cout << "End";
+tag:
+  - statement/jump
+code: |
+  for(int i = 0; i < 5; ++i){
+    if(i == 3){
+      continue;
+    }
+    std::cout << i << " "; 
+  }
+tag:
+  - statement/jump
+
+code: |
+  int fn(int a, int b) {
+    return a + b;
+  }
+  int main(){
+    std::cout << fn(2, 10);
+  }
+tag:
+  - statement/jump
+
+code: |
+  for(int i = 0; i < 5; ++i){
+    std::cout << i << " ";
+    if(i == 3){
+      break;
+    }
+  }
+  std::cout << "End";
+tag:
+  - statement/jump
+  - statement/iteration
+
+
+code: |
+  int a = 4;
+  int b = a;
+  std::cout << b;
+tag:
+  - statement/expression/assignment
+
+---
+
+code: | 
+  int a = 3;
+  a += 24;
+  std::cout << a;
+tag:
+  -statement/expression/assignment
+
+---
+
+code: |
+  int a = 3;
+  a %= 2;
+  if (a) {
+    std::cout << "a is 1\n";
+  } else {
+    std::cout << "a is 0\n";
+  }
+tag:
+  - statement/expression/assignment
+  - statement/selection
+
+---
+
+code: | 
+  int a = 3;
+  a *= 5;
+  std::cout << a;
+tag:
+  - statement/expression/assignment
+
+---
+
+code: | 
+  int a = 9;
+  a /= 3;
+  std::cout << a;
+tag:
+  - statement/expression/assignment
+
+---
+
+code: | 
+  int a = 3;
+  a -= 2;
+  std::cout << a;
+tag:
+  - statement/expression/assignment
+
+---  
+
+code: |
+  int a = 2;
+  int b = 1;
+  if (a == b){
+      std::cout << "a is equal to b" << std::endl;
+  } else {
+      std::cout << "a is not equal to b" << std::endl;
+  }
+tag:
+  - statement/expression/relational
+  - statement/selection
+---  
+
+code: |
+  int a = 2;
+  int b = 1;
+  int c = (a == b)
+  std::cout << c;
+tag:
+  - statement/expression/relational
+  - statement/expression/assignment
+---
+
+code: | 
+  int a = 2;
+  int b = 1;
+  int c = 3;
+  if (a > b){
+      std::cout << "a is greater than b" << std::endl;
+  }
+   if (b < c){
+      std::cout << "b is less than c" << std::endl;
+  }
+tag:
+  - statement/expression/relational
+  - statement/selection
+
+---
+
+code: |
+  int a = 2;
+  int b = 1;
+  int c = 2;
+  if (a >= b){
+      std::cout << "a is greater than b or equal to b" << std::endl;
+  }
+  if (a <= c){
+      std::cout << "a is less than c or equal to c" << std::endl;
+  }
+tag:
+  - statement/expression/relational
+  - statement/selection
+
+
+---
+
+code: |
+  int a = 4;
+  int b = 3;
+  if (a != b){
+    std::cout << "a is not equal to b\n";
+  } else {
+    std::cout << "a is equal to b";
+  }
+tag:
+  - statement/expression/relational
+  - statement/selection
+
+
+---
+
+code: | 
+  int a = 3;
+  std::cout << a * 4;
+tag:
+  - statement/expression/arithmetic//binary
+
+---
+
+code: | 
+  int a = 3;
+  int b = 21;
+  std::cout << b / a;
+tag:
+  - statement/expression/arithmetic/binary
+
+
+---
+
+code: | 
+  int a = 3;
+  int b = a + 3;
+  std::cout << b + 2;
+tag:
+  - statement/expression/arithmetic/binary
+
+---
+
+code: |
+  int a = 3;
+  int b = a - 3;
+  std::cout << b - 2;
+tag:
+  - statement/expression/arithmetic/binary
+
+---
+
+code: |
+  int a = 3;
+  std::cout << a % 2;
+tag:
+  - statement/expression/arithmetic/binary
+
+---
+
+code: |
+  int a = 3;
+  int b = a++;
+  std::cout << b;
+tag:
+  - statement/expression/arithmetic/unary
+
+---
+
+code: |
+  int a = 3;
+  int b = ++a;
+  std::cout << b;
+tag:
+  - statement/expression/arithmetic/unary
+
+---
+
+code: |
+  int a = 3;
+  int b = a--;
+  std::cout << b;
+tag:
+  - statement/expression/arithmetic/unary
+
+---
+
+code: |
+  int a = 3;
+  int b = --a;
+  std::cout << b;
+tag:
+  - statement/expression/arithmetic/unary
+
+---
+
+code: |
+  int a = 3;
+  int b = a++;
+  std::cout << ++b;
+tag:
+  - statement/expression/arithmetic/unary
+
+---
+
+code: |
+  int a = 5;
+  int b = 8;
+  bool result = (a > 3) && (b > 9);
+  std::cout << result;
+  result == (a > 4) && (a > 2);
+  std::cout << result;
+tag:
+  - statement/expression/logical/binary
+  - statement/expression/arithmetic/binary
+
+---
+
+code: |
+  int a = 5;
+  int b = 8;
+  bool result = (a > 3) || (b > 9);
+  std::cout << result;
+  result == (a > 4) || (a > 2);
+  std::cout << result;
+  result = (a > 6) || (a > 9);
+  std::cout << result;
+tag:
+  - statement/expression/logical/binary
+  - statement/expression/arithmetic/binary
+
+---
+
+code: |
+  bool result = (1 > 3) || (4 > 3);
+  std::cout << result;
+  std::cout << !result;
+tag:
+  - statement/expression/logical/binary
+  - statement/expression/arithmetic/binary
+
+---
+
+code: |
+  int a = 3;
+  int b = 9;
+  int result = b > 10 ? b : a;
+  std::cout << result;
+tag:
+  - statement/expression/logical/ternary
+
+---
+
+code: |
+  int a = 2;
+  int b = 3;
+  std::cout << (a & b);
+tag:
+  - statement/expression/bitwise/binary
+  
+---
+
+code: |
+  int a = 2;
+  int b = 3;
+  std::cout << (a | b);
+tag:
+  - statement/expression/bitwise/binary
+  
+---
+
+code: |
+  int a = 2;
+  int b = 3;
+  std::cout << (a ^ b);
+tag:
+  - statement/expression/bitwise/binary
+  
+---
+
+code: |
+  int a = 2;
+  int b = 3;
+  std::cout << (a & b);
+tag:
+  - statement/expression/bitwise/binary
+
+---
+
+code: |
+  int a = 3;
+  std::cout << (a << 3);
+tag:
+  - statement/expression/bitwise/binary
+
+---
+
+code: |
+  int a = 32;
+  std::cout << (a >> 2);
+tag:
+  - statement/expression/bitwise/binary
+
+code: |
+  int a = 32;
+  std::cout << ~a;
+tag:
+  - statement/expression/bitwise/unary
