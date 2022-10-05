@@ -1,0 +1,180 @@
+code: |
+  class Point {
+   private:
+    int x;
+    int y;
+   public:
+    Point(int i = 0, int j = 0) : x(i), y(j) {}
+  };
+tag:
+  - class/constructor/constructor with parameters
+
+---
+
+code: |
+  class Person {
+   private:
+    int age;
+   public:
+    Person(const Person& p1) : age(p1.age) {}
+  };
+tag:
+  - class/constructor/copy constructor
+
+---
+
+code: |
+  class Base {
+   public:
+    Base() {}
+    virtual ~Base() {}
+  };
+  
+  class Derived : public Base {
+   public:
+    Derived() {}
+    virtual ~Derived() {}
+  };
+  
+  Base* b = new Derived;
+  delete b; # safe
+tag:
+  - class/destructor/virtual destructor
+  - class/constructor/default constructor
+
+---
+
+code: |
+  class AbstractBase {
+   public:
+    virtual ~AbstractBase() = 0;
+  };
+  
+  class Derived : public AbstractBase {
+   public:
+    ~Derived() {}
+  };
+  
+  # AbstractBase obj; # compiler error
+  Derived obj; # OK
+  AbstractBase* b = new Derived();
+  delete b;
+tag:
+  - class/destructor/virtual destructor/pure virtual destructor
+
+---
+
+code: |
+  class S {
+   private:
+    int n;
+   public:
+    void function();
+  };
+  
+  void S::function() { 
+   n = 1;
+  }
+  
+  S obj;
+  obj.function();
+tag:
+  - class/method/non-static method
+
+---
+
+code: |
+  class Point {
+   private:
+    int x;
+    int y;
+   public:
+    Point &operator++() {
+     this->x++;
+     this->y++;
+     return *this;
+    }
+  };
+tag:
+  - class/overloading
+
+---
+
+code: |
+  class A {
+   public:
+    static void fun() {
+     std::cout << "Hello World!";
+    }
+  };
+  
+  A::fun();
+tag:
+  - class/method/static method
+
+---
+
+code: |
+  class Base {
+   public:
+    virtual void print() {
+     std::cout << "Print base class\n";
+    }
+  };
+  
+  class Derived : public Base {
+   public:
+    void print() override {
+     std::cout << "Print derived class\n";
+    }
+  };
+  
+  Base b;
+  Derived d;
+  
+  Base& br = b; 
+  Base& dr = d;
+  
+  br.print(); # function call trough reference
+  dr.print();
+tag:
+  - class/method/virtual method
+
+---
+
+code: |
+  class Base {
+   public:
+    virtual void foo();
+  };
+  
+  class A : public Base {
+   public:
+    void foo() final; # Base::foo is overridden and A::foo is the final override
+    void bar() final; # Error: bar cannot be final as it is non-virtual
+  };
+  
+  class B final : public A { # class B is final
+   void foo() override; # Error: foo cannot be overridden as it is final in A
+  };
+
+  class C : public B {}; # Error: B is final
+tag:
+  - class/method/virtual method
+  - class/final
+
+---
+
+code: |
+  class Number {
+   public:
+    template<typename T>
+    T add(T p1, T p2);
+  };
+
+   template<typename T>
+   T Number::add(T p1, T p2) {
+    return (p1 + p2);
+   }
+tag:
+  - class/method/template method
