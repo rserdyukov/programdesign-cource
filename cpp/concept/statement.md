@@ -20,7 +20,7 @@
 "selection statement"
 - definition: условный оператор
 - is-a
-  - "if-else statement" 
+  - "if/else statement" 
   - "switch statement"
 
 "iteration statement"
@@ -29,7 +29,7 @@
   - "while loop"
   - "do-while loop"
   - "for loop"
-  - "range for loop"(since C++11)
+  - "range for loop"
 
 "jump statement"
 - definition: оператор перехода
@@ -46,7 +46,9 @@
   - "relational operation"
   - "arithmetic operation" 
   - "logical operation"
-  - "bitwise operation"  
+  - "bitwise operation"
+  - "input operator"
+  - "output operator"
 
  "relational operation"
 - definition: операция отношения  
@@ -67,6 +69,7 @@
    - "operator *="
    - "operator %="
    - "operator +="
+
 
 "arithmetic operation"
 - definition: арифметическая операция
