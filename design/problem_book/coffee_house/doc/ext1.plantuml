@@ -1,0 +1,16 @@
+@startuml ext1
+
+
+class Application <<main, injector>> {
+    + {static} void main()
+    # CoffeeHouse build()
+}
+
+class WorkerWithSpeed {
+    - float speed
+    # void processStepTime(RecipeStep step)
+}
+
+WorkerWithSpeed -|> Worker
+Application ..> WorkerWithSpeed : <<create>>
+@enduml

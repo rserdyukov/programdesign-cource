@@ -1,0 +1,173 @@
+@startuml base
+
+
+class Application <<main, injector>> {
+    + {static} void main()
+    # CoffeeHouse build()
+}
+
+Application ..> CoffeeHouse : <<create>>
+Application ..> VisitorGenerator : <<create>>
+Application ..> CashDesk : <<create>>
+Application ..> Worker : <<create>>
+Application ..> Product : <<create>>
+Application ..> Ingredient : <<create>>
+Application ..> KitchenMachine : <<create>>
+Application ..> Recipe : <<create>>
+Application ..> RecipeStep : <<create>>
+
+
+
+class CashDesk {
+    + void addVisitorToQueue(Visitor visitor)
+    + Visitor getFirstVisitor()
+    ~ void removeVisitor(Visitor visitor)
+}
+
+CashDesk "1" o-- "n, -visitorList" Visitor
+CashDesk "1" --> "1, +worker" Worker
+
+class CoffeeHouse {
+    - long currentTime
+    - long ratingSum
+    - long ratingAmount
+
+    + void run()
+    + VisitorRequestStatus requestProduct(Product product)
+    + void setVisitorGenerator(VisitorGenerator visitorGenerator)
+    + void addRating(int rating)
+    + float getAvgRating()
+    + void visitorLeave(Visitor visitor)
+    + void createMenu()
+    + List<Product> getMenu()
+    + void addDessert(Product dessert, int amount)
+    + void takeProduct(Product product)
+    + void addRecipe(Product product, Recipe recipe)
+    + Recipe getRecipe(Product product)
+    + void addIngredient(Ingredient ingredient, int amount)
+    + boolean takeIngredient(Ingredient ingredient, int amount)
+    + void addCashDesk(CashDesk cashDesk)
+    + List<CashDesk> getCashDeskList()
+}
+
+CoffeeHouse "1" --> "1, -visitorGenerator" VisitorGenerator
+
+CoffeeHouse "1" --> "n, -dessertMap" Product
+(CoffeeHouse, Product) .. DessertMap
+class DessertMap {
+    int amount
+}
+
+CoffeeHouse "1" --> "n, -recipeMap" Product
+(CoffeeHouse, Product) .. RecipeMap
+class RecipeMap {
+    Recipe recipe
+}
+
+CoffeeHouse "1" --> "n, -ingredientMap" Ingredient
+(CoffeeHouse, Ingredient) .. IngredientMap
+class IngredientMap {
+    int amount
+}
+
+CoffeeHouse "1" --> "2, -cashDeskList" CashDesk
+CoffeeHouse "1" --> "n, -menuList" Product
+CoffeeHouse "1" --> "n, -outgoingVisitorList" Visitor
+
+
+
+class Ingredient {
+    + String name { read-only }
+}
+
+class KitchenMachine {
+    + String name { read-only }
+}
+
+class Product {
+    + String name { read-only }
+    + boolean isNeedPrepare { read-only }
+}
+
+class Recipe {
+    + Recipe addStep(RecipeStep step)
+    + List<RecipeStep> getStepList()
+}
+
+Recipe "1" o-- "n, -stepList" RecipeStep
+
+
+class RecipeStep {
+    + int amount { read-only }
+    + long time { read-only }
+}
+
+RecipeStep "n" --> "1, +ingredient { read-only }" Ingredient
+RecipeStep "n" --> "1, +ingredient { read-only }" KitchenMachine
+
+class Settings {
+    + {static} long TICK_TIME
+    + {static} long CLOSING_TIME
+    + {static} long VISITOR_GENERATE_TIME_PERIOD
+    + {static} long VISITOR_WAITING_TIME
+}
+
+CoffeeHouse ..> Settings : <<use>>
+Visitor ..> Settings : <<use>>
+VisitorGenerator ..> Settings : <<use>>
+
+
+class Visitor {
+    # long nextActionTime
+    # int successRating
+
+    + void process(long currentTime)
+    + void askDesiredProduct(long currentTime)
+    + void givePreparedProduct(long currentTime, Product product)
+    + void failDesiredProduct(long currentTime, Product product)
+}
+
+Visitor "n" --> "1, #model" CoffeeHouse
+Visitor "n" --> "1, #cashDesk" CashDesk
+Visitor "n" --> "1, #desiredProduct" Product
+
+
+class VisitorGenerator {
+    - long nextActionTime
+
+    + void process(long currentTime)
+    # Visitor generateVisitor()
+}
+
+VisitorGenerator "n" --> "1, #model" CoffeeHouse
+VisitorGenerator ..> Visitor : <<create>>
+
+enum VisitorRequestStatus {
+    SUCCESS
+    NEED_PREPARE
+    PRODUCT_MISSING
+}
+
+CoffeeHouse ..> VisitorRequestStatus : <<use>>
+Visitor ..> VisitorRequestStatus : <<use>>
+
+class Worker {
+    # int recipeStepIndex
+    # long nextActionTime
+
+    + void process(long currentTime)
+    # void prepareProductProcess(long currentTime)
+    # void prepareProductFinished(long currentTime)
+    # void processStepTime(RecipeStep step)
+    - RecipeStep getRecipeStep(int index)
+}
+
+Worker "n" --> "1, #model" CoffeeHouse
+Worker "n" --> "1, #cashDesk" CashDesk
+Worker "n" --> "1, #currentRecipe" Product
+Worker "n" --> "1, #currentRecipe" Recipe
+
+Worker ..> RecipeStep : <<use>>
+
+
+@enduml

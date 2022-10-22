@@ -1,0 +1,23 @@
+@startuml ext4
+
+
+class Application <<main, injector>> {
+    + {static} void main()
+    # CoffeeHouse build()
+}
+
+class CoffeeHouseWithMoreStatistics {
+    - int visitorCounter
+    - int dessertCounter
+    - int drinkCounter
+
+    + void visitorLeave(Visitor visitor)
+    + void takeProduct(Product product)
+
+    + void printMoreStatistics()
+}
+
+CoffeeHouseWithMoreStatistics -|> CoffeeHouse
+Application ..> CoffeeHouseWithMoreStatistics : <<create>>
+Application ..> CoffeeHouseWithMoreStatistics : <<use>>
+@enduml

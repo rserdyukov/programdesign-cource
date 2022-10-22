@@ -1,0 +1,23 @@
+@startuml ext2
+
+
+class Application <<main, injector>> {
+    + {static} void main()
+    # CoffeeHouse build()
+}
+
+class VisitorGeneratorExt2 {
+    # Visitor generateVisitor()
+}
+
+class VisitorWithLastChance {
+    + void failDesiredProduct(long currentTime, Product product)
+}
+
+VisitorGeneratorExt2 -|> VisitorGenerator
+VisitorWithLastChance -|> Visitor
+
+Application ..> VisitorGeneratorExt2 : <<create>>
+VisitorGeneratorExt2 ..> VisitorWithLastChance : <<create>>
+
+@enduml
