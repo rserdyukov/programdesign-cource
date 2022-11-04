@@ -1,0 +1,202 @@
+
+code: |
+  template <class T> 
+  class A {
+    void f() {}
+  }; 
+
+  template class A<char*>;
+  template void A<double>::f()
+tag:
+  - template/class template
+  - template/class template/explicit instantiation
+
+---
+
+code: |
+  template <class T> 
+  class A {
+    void f() {}
+  }; 
+
+  A<int> a1;
+  A<char>* p; // nothing is instantiated here
+  p->f();     // but here occurs implicit instantiation of A<char> and A<char>::f() 
+tag:
+  - template/class template
+  - template/class template/implicit instantiation
+
+---
+
+code: |
+  template <typename T> 
+  void f(T s) {
+    std::cout << s << std::endl;
+  }
+
+  template void f<double>(double); // instantiates f<double>(double)
+  template void f<>(char);         // instantiates f<char>(char), template argument deduced
+  template void f(int);            // instantiates f<int>(int), template argument deduced
+tag:
+  - template/function template
+  - template/function template/template argument deduction
+  - template/function template/explicit instantiation
+
+---
+
+code: |
+  template <typename T>
+  void f(T s) {
+    std::cout << s << std::endl;
+  }
+  
+  f<double>(1); // instantiates and calls f<double>(double)
+  f<>('a');     // instantiates and calls f<char>(char)
+  f(7);         // instantiates and calls f<int>(int)
+  void (*pf)(std::string) = f; // instantiates f<string>(string)
+  pf("some text");             // calls f<string>(string)
+tag:
+  - template/function template
+  - template/function template/implicit instantiation
+  - template/function template/template argument deduction
+
+--- 
+
+code: |
+  template<class T>
+  void f(T t);
+  template<class X>
+  void g(const X x);
+  template<class Z>
+  void h(Z z, Z* zp);
+  
+  f<int>(1);       // function type is void(int), T is int
+  f<const int>(1); // function type is void(int), T is const int
+  g<int>(1);       // function type is void(int), X is const int
+  g<const int>(1); // function type is void(int), X is const int 
+  h<const int>(1, NULL); // function type is void(int, const int*) 
+                         //Z is const int, zp is const int*
+tag:
+  - template/function template
+  - template/function template/template argument substitution
+  - template/function template/template argument deduction
+  - template/function template/implicit instantiation
+
+---
+
+code: |
+  template<int I, int J>
+  A<I+J> f(A<I>, A<J>); 
+  
+  template<int K, int L>
+  A<K+L> f(A<K>, A<L>); 
+  
+  template<int I, int J>
+  A<I-J> f(A<I>, A<J>); 
+tag:
+  - template/function template
+  - template/function template/overloading
+
+--- 
+
+code: |
+  template <class T>
+  void f(T);    // #1: overload for all types
+  template <>
+  void f(int*); // #2: specialization of #1 for pointers to int
+  template <class T>
+  void f(T*);   // #3: overload for all pointer types
+  
+  f(new int(1)); // calls #3, even though specialization of #1 would be a perfect match
+tag:
+  - template/function template"
+  - template/function template/explicit template specialization
+
+---
+
+code: |
+  class A { 
+    template <typename T>
+    void f(const T& obj) {  // member template
+      std::cout << obj << std::endl; 
+    } 
+  };
+tag:
+  - template/function template
+  - template/function template/member templates
+
+---
+
+code: | 
+  template<class T, int N>
+  struct A {};
+  
+  template<class T>
+  using B = A<T, 10>;
+
+  B<std::string> b;
+tag:
+  - template/class template/alias template
+  - template/class template/non-type parameter
+
+---
+
+code: |
+  template<class T>
+  constexpr T pi = T(3.1415926535897932385L);
+
+  template<class T>
+  T circular_area(T r) {
+    return pi<T> * r * r;
+  }
+
+  double s = circular_area(5.5); // pi<double>
+  float s = circular_area(5.5);  // pi<float>
+tag:
+  - template/variable template
+  - template/function template
+  - template/function template/template argument deduction
+
+---
+
+code: |
+  template <class T, int N>
+  class Sequence{
+   public:
+    T seq [N];
+  };
+ 
+  Sequence<double, 5> sequence1;
+  Sequence<int, 3> sequence2;
+tag: 
+  - template/class template/non-type parameter
+  - template/class template
+
+---
+
+code: |
+  template <typename T>
+  class A {};
+  
+  template <template <typename> class V>
+  class C {};
+  
+  C<A> c; 
+tag: 
+  - template/class template/template arguments
+  - template/class template
+
+---
+
+code: |
+  template <typename T>
+  class X {};
+  struct A;         
+  using B = struct {};
+
+  X<A> x1;
+  X<A*> x2; 
+  X<B> x3; 
+tag: 
+  - template/class template/type arguments
+  - template/alias template
