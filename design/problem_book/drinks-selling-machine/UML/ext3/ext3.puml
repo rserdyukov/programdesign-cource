@@ -1,0 +1,30 @@
+@startuml ext3
+
+class ClinetQueueMachineHandler <<main, injector>> {
+  # machine_class: Class
+  # client_class: Class
+  # machine: Class
+  # current_client: None
+  # client_generation_delta: Int
+
+  - init(machine_cls, client_cls, component_cls)
+  + run()
+  # client_class createClient()
+}
+
+class DrinkSellingMachine
+class IngredientOperator
+
+ClinetQueueMachineHandler ..> DrinkSellingMachine: <<create>>
+
+class IngredientOperatorWithMistake #red {
+  - mistake: str
+
+  # Tuple<str, bool> operate_ingredient()
+}
+
+DrinkSellingMachine "1" *--> "n" IngredientOperatorWithMistake
+IngredientOperatorWithMistake --|> IngredientOperator
+
+
+@enduml

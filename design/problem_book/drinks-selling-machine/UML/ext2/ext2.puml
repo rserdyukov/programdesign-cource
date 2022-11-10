@@ -1,0 +1,29 @@
+@startuml ext2
+
+class ClinetQueueMachineHandler <<main, injector>> {
+  # machine_class: Class
+  # client_class: Class
+  # machine: Class
+  # current_client: ClintWithPickCount
+  # client_generation_delta: int
+
+  - init(machine_cls, client_cls, component_cls)
+  + run()
+  # client_class createClient()
+}
+
+class DrinkSellingMachine
+class Client
+class ClientWithPickCount #red {
+  # pick_count: Int
+
+  - init()
+  # bool pick_drink(machine)
+}
+
+ClinetQueueMachineHandler ..> DrinkSellingMachine: <<create>>
+ClinetQueueMachineHandler ..> ClientWithPickCount: <<create>>
+ClientWithPickCount --|> Client
+DrinkSellingMachine "1" --> "1" ClientWithPickCount
+
+@enduml

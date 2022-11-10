@@ -1,0 +1,30 @@
+@startuml ext1
+
+class ClinetQueueMachineHandler <<main, injector>> {
+  # machine_class: Class
+  # client_class: Class
+  # machine: Class
+  # current_client: Client | None
+  # client_generation_delta: Int
+
+  - init(machine_cls, client_cls, component_cls)
+  + run()
+  # Client createClient()
+}
+
+class DrinkSellingMachine
+class IngredientOperator
+
+ClinetQueueMachineHandler ..> DrinkSellingMachine: <<create>>
+
+class IngredientOperatorWithSpeed #lightblue {
+  -operation_speed: int
+
+  - init()
+}
+
+DrinkSellingMachine "1" *--> "n" IngredientOperatorWithSpeed
+IngredientOperatorWithSpeed --|> IngredientOperator
+
+
+@enduml

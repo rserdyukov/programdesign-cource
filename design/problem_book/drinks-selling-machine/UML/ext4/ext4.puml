@@ -1,0 +1,29 @@
+@startuml ext4
+
+class ClinetQueueMachineHandler <<main, injector>> {
+  # machine_class: Class
+  # client_class: Class
+  # machine: Class
+  # current_client: Class
+  # client_generation_delta: Int
+
+  - init(machine_cls, client_cls, component_cls)
+  + run()
+  # createClient()
+  + print_statistics()
+}
+
+class DrinkSellingMachine
+
+class DrinkSellingMachineWithStats #red {
+  - statistics: Dict<str, Dict<str, int> | int>
+
+  - init(machine_cls, client_cls, component_cls)
+  + void print_statistics()
+}
+
+ClinetQueueMachineHandler ..> DrinkSellingMachineWithStats: <<create>>
+DrinkSellingMachineWithStats --|> DrinkSellingMachine
+
+
+@enduml
