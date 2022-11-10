@@ -17,7 +17,7 @@ class IngredientOperator
 
 ClinetQueueMachineHandler ..> DrinkSellingMachine: <<create>>
 
-class IngredientOperatorWithMistake #red {
+class IngredientOperatorWithMistake #lightBlue {
   - mistake: str
 
   # Tuple<str, bool> operate_ingredient()

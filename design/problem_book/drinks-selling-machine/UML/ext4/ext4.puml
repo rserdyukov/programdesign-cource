@@ -15,7 +15,7 @@ class ClinetQueueMachineHandler <<main, injector>> {
 
 class DrinkSellingMachine
 
-class DrinkSellingMachineWithStats #red {
+class DrinkSellingMachineWithStats #lightBlue {
   - statistics: Dict<str, Dict<str, int> | int>
 
   - init(machine_cls, client_cls, component_cls)

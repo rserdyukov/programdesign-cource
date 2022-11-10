@@ -14,7 +14,7 @@ class ClinetQueueMachineHandler <<main, injector>> {
 
 class DrinkSellingMachine
 class Client
-class ClientWithPickCount #red {
+class ClientWithPickCount #lightBlue {
   # pick_count: Int
 
   - init()

@@ -13,18 +13,24 @@ class ClinetQueueMachineHandler <<main, injector>> {
 }
 
 class DrinkSellingMachine
+class DrinkSellingMachineWithSpeed #lightblue
 class IngredientOperator
 
 ClinetQueueMachineHandler ..> DrinkSellingMachine: <<create>>
+ClinetQueueMachineHandler ..> DrinkSellingMachineWithSpeed: <<create>>
 
 class IngredientOperatorWithSpeed #lightblue {
   -operation_speed: int
-
+ 
+  # operate_ingredient()
   - init()
 }
 
-DrinkSellingMachine "1" *--> "n" IngredientOperatorWithSpeed
+DrinkSellingMachine "1" *--> "n" IngredientOperator
 IngredientOperatorWithSpeed --|> IngredientOperator
+
+DrinkSellingMachineWithSpeed --|> DrinkSellingMachine
+DrinkSellingMachineWithSpeed "1" *--> "n" IngredientOperatorWithSpeed
 
 
 @enduml
