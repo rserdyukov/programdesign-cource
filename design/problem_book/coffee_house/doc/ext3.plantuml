@@ -1,0 +1,30 @@
+@startuml ext3
+
+
+class Application <<main, injector>> {
+    + {static} void main()
+    # CoffeeHouse build()
+}
+
+class VisitorGeneratorExt3 {
+    # Visitor generateVisitor()
+}
+
+class VisitorExt3 {
+    + void failDesiredProduct(long currentTime, Product product)
+}
+
+VisitorGeneratorExt3 -|> VisitorGenerator
+VisitorExt3 -|> Visitor
+
+class WorkerExt3 {
+    # void prepareProductProcess(long currentTime)
+}
+
+WorkerExt3 -|> Worker
+
+Application ..> WorkerExt3 : <<create>>
+Application ..> VisitorGeneratorExt3 : <<create>>
+VisitorGeneratorExt3 ..> VisitorExt3 : <<create>>
+
+@enduml
