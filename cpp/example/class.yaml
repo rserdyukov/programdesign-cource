@@ -4,7 +4,7 @@ code: |
     int x;
     int y;
    public:
-    Point(int i = 0, int j = 0) : x(i), y(j) {}
+    Point(int i = 0, int j = 0) :   {}
   };
 tag:
   - class/constructor/constructor with parameters
@@ -45,26 +45,6 @@ tag:
 ---
 
 code: |
-  class AbstractBase {
-   public:
-    virtual ~AbstractBase() = 0;
-  };
-  
-  class Derived : public AbstractBase {
-   public:
-    ~Derived() {}
-  };
-  
-  # AbstractBase obj; # compiler error
-  Derived obj; # OK
-  AbstractBase* b = new Derived();
-  delete b;
-tag:
-  - class/destructor/virtual destructor/pure virtual destructor
-
----
-
-code: |
   class S {
    private:
     int n;
@@ -72,9 +52,7 @@ code: |
     void function();
   };
   
-  void S::function() { 
-   n = 1;
-  }
+  void S::function() { n = 1; }
   
   S obj;
   obj.function();
@@ -97,6 +75,7 @@ code: |
   };
 tag:
   - class/overloading
+  - class/method/non-static method
 
 ---
 
@@ -139,6 +118,8 @@ code: |
   dr.print();
 tag:
   - class/method/virtual method
+  - class/method/non-static method
+  - class/specifier/override
 
 ---
 
@@ -161,7 +142,9 @@ code: |
   class C : public B {}; # Error: B is final
 tag:
   - class/method/virtual method
-  - class/final
+  - class/method/non-static method
+  - class/specifier/final
+  - class/specifier/override
 
 ---
 
@@ -178,3 +161,17 @@ code: |
    }
 tag:
   - class/method/template method
+
+---
+
+code: |
+  class Person {
+   private:
+    int age;
+    friend void changeAge(Person &par); # Declaration appears anywhere in class body
+  };
+  
+  void changeAge(Person &par) { par.age = 20; } # Get access to private field
+tag:
+  - class/method/non-static method
+  - class/specifier/friend

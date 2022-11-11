@@ -1,16 +1,16 @@
 "class"
 
-- "definition: класс"
+- definition: класс
 - has-a
     - "constructor"
     - "destructor"
     - "method"
     - "overloading"
-    - "final"
+    - "specifier"
 
 "constructor"
 
-- "definition: конструктор"
+- definition: конструктор
 - is-a
     - "default constructor"
     - "constructor with parameters"
@@ -18,21 +18,23 @@
 
 "destructor"
 
-- "definition: деструктор"
-- has-a
-    - "virtual destructor"
-
-"virtual destructor"
-
-- "definition: виртуальный деструктор"
+- definition: деструктор
 - is-a
-    - "pure virtual destructor"
+    - "virtual destructor"
 
 "method"
 
-- "definition: метод"
+- definition: метод
 - is-a
     - "non-static method"
     - "static method"
     - "virtual method"
     - "template method"
+
+"specifier"
+
+- definition: спецификатор
+- is-a
+    - "final"
+    - "override"
+    - "friend"
