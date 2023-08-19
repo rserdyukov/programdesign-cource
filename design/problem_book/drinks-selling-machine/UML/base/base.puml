@@ -1,0 +1,143 @@
+@startuml base
+
+class ClinetQueueMachineHandler <<main, injector>> {
+  # machine_class: Class
+  # client_class: Class
+  # machine: Class
+  # current_client: Client
+  # client_generation_delta: int
+
+  - init(machine_cls, client_cls, component_cls)
+  + void run()
+  # Client createClient()
+}
+
+ClinetQueueMachineHandler ..> Client: <<create>>
+ClinetQueueMachineHandler ..> DrinkSellingMachine: <<create>>
+
+class Client {
+  # possible_wait_time: int
+  # chosen_drink: str
+  # received_drink: PreReadyDrink | CookedDrink | bool
+  # order_time: int
+
+  - init()
+  + bool order_drink(machine)
+  + PreReadyDrink | CookedDrink | bool received_drink()
+  # bool pick_drink(machine)
+  # bool order_drink(drink_selling_machine)
+}
+
+interface IOrderable {
+  + {abstract} get_menu()
+  + {abstract} make_order(ordered_position)
+  + {abstract} is_position_avaliable(position)
+}
+
+class DrinkSellingMachine {
+  # components: Dict<str, IngredientOperator>
+  # storages: Dict<str, PreReadyGoodsStorage | IngredientStorage>
+  - receipts: Dict<str, Dict<str, Dict<str, int | str>>>
+  - work_start: int
+  - work_delta: int
+
+  - void init(component_cls)
+  + bool is_available()
+  + List<str> get_menu()
+  + PreReadyDrink | CookedDrink | bool make_order(ordered_position)
+  + bool is_position_avaliable(position)
+  # Dict<str, Dict<str, Dict<str, int | str>>> get_receipt(required_drink)
+  # CookedDrink | bool execute_receipt(receipt, required_drink)
+  # Dict<str, bool> | bool get_required_ingredients(receipt, prev_extraction_info)
+  # List<Tuple<str, bool>> trigger_operations(req_comps)
+  # CookedDrink | bool execute_order(required_drink)
+  # bool check_order_possibility(order)
+  # PreReadyDrink | bool get_pre_ready_good(name)
+}
+
+IOrderable <|-- DrinkSellingMachine
+
+IngredientOperator "n" <--* "1" DrinkSellingMachine
+
+DrinkSellingMachine "n" --> "1" Client
+Client "n" --> "1" DrinkSellingMachine
+
+class IngredientOperator {
+  - name: str
+  - binded_ingredients: List<str>
+  # current_receipt: Dict<str, int | str>
+  # current_ingredient: str
+
+  - init(name, ingredients)
+  + Tuple<str, bool> operate_ingredient()
+  + bool | void pass_receipt_ingredient(receipt, ingredient)
+  + str name()
+  # Tuple<str, bool> operate_ingredient()
+  # void clean_receipt_ingredient_slot()
+}
+
+class Item {
+  - init(name)
+  + str name()
+}
+
+class Ingredient{
+  + amount: Int
+
+  - init(name, amount)
+}
+
+class PreReadyDrink{
+  + amount: Int
+
+  - init(name, amount)
+  - str repr()
+}
+
+class CookedDrink {
+  - init(name)
+  - str repr()
+}
+
+CookedDrink "n" o--> "1" DrinkSellingMachine
+
+Item <|-- Ingredient
+Item <|-- PreReadyDrink
+Item <|-- CookedDrink
+
+class Storage{
+  - name: str
+  # stored_items: None
+
+  - init(name)
+  + bool check_stored_item(name, amount)
+  + Dict<str, int> get_current_state()
+  - bool contains(item)
+}
+
+class IngredientStorage{
+  # stored_items: Dict<str, Ingredient>
+
+  - init(name)
+  + Dict<str, bool> | bool get_receipt_ingredients(ingredients, receipt)
+}
+
+class PreReadyGoodsStorage{
+  # stored_items: Dict<str, PreReadyDrink>
+
+  - init(name)
+  + PreReadyDrink | bool get_element(name, amount)
+}
+
+Storage <|-- IngredientStorage
+Storage <|-- PreReadyGoodsStorage
+
+IngredientStorage "1" *--> "n" Ingredient
+PreReadyGoodsStorage "1" *--> "n" PreReadyDrink
+
+DrinkSellingMachine "1" o--> "1" IngredientStorage
+DrinkSellingMachine "1" *--> "1" PreReadyGoodsStorage
+
+DrinkSellingMachine --> Item
+
+@enduml
