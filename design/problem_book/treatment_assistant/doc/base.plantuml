@@ -1,0 +1,12 @@
+@startuml base
+
+class Application <<main, injector>> {
+    + {static} void main()
+    # TreatmentAssistant build()
+}
+
+class TreatmentAssistant {
+    + void run()
+}
+
+@enduml
